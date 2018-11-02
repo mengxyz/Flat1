@@ -23,17 +23,27 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.paSubItem = New System.Windows.Forms.Panel()
+        Me.Button12 = New System.Windows.Forms.Button()
+        Me.Button11 = New System.Windows.Forms.Button()
+        Me.Button10 = New System.Windows.Forms.Button()
+        Me.Button9 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnItem = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.paUser = New System.Windows.Forms.Panel()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
@@ -44,6 +54,7 @@ Partial Class frmMain
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.PaEmployee = New System.Windows.Forms.Panel()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.PictureBox8 = New System.Windows.Forms.PictureBox()
         Me.txtPass = New System.Windows.Forms.TextBox()
         Me.txtUser = New System.Windows.Forms.TextBox()
@@ -76,13 +87,23 @@ Partial Class frmMain
         Me.RectangleShape2 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         Me.RectangleShape1 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         Me.paEmAdmin = New System.Windows.Forms.Panel()
+        Me.Button8 = New System.Windows.Forms.Button()
         Me.txtEmpUser = New System.Windows.Forms.TextBox()
         Me.PicEmp = New System.Windows.Forms.PictureBox()
-        Me.dgvEmp = New System.Windows.Forms.DataGridView()
         Me.ShapeContainer2 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.RectangleShape9 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
-        Me.Button8 = New System.Windows.Forms.Button()
+        Me.dgvEmp = New System.Windows.Forms.DataGridView()
+        Me.paCate = New System.Windows.Forms.Panel()
+        Me.btnCateDelete = New System.Windows.Forms.Button()
+        Me.btnCateCancle = New System.Windows.Forms.Button()
+        Me.btnCateEdit = New System.Windows.Forms.Button()
+        Me.btnCateAdd = New System.Windows.Forms.Button()
+        Me.btnCateSave = New System.Windows.Forms.Button()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.txtCateNa = New System.Windows.Forms.TextBox()
+        Me.dgvCate = New System.Windows.Forms.DataGridView()
         Me.Panel1.SuspendLayout()
+        Me.paSubItem.SuspendLayout()
         Me.paUser.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -98,21 +119,100 @@ Partial Class frmMain
         Me.paEmAdmin.SuspendLayout()
         CType(Me.PicEmp, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvEmp, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.paCate.SuspendLayout()
+        CType(Me.dgvCate, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.paSubItem)
         Me.Panel1.Controls.Add(Me.Button6)
         Me.Panel1.Controls.Add(Me.Button4)
         Me.Panel1.Controls.Add(Me.Button3)
         Me.Panel1.Controls.Add(Me.Button5)
-        Me.Panel1.Controls.Add(Me.Button2)
+        Me.Panel1.Controls.Add(Me.btnItem)
         Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(200, 660)
         Me.Panel1.TabIndex = 0
+        '
+        'paSubItem
+        '
+        Me.paSubItem.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.paSubItem.Controls.Add(Me.Button12)
+        Me.paSubItem.Controls.Add(Me.Button11)
+        Me.paSubItem.Controls.Add(Me.Button10)
+        Me.paSubItem.Controls.Add(Me.Button9)
+        Me.paSubItem.Location = New System.Drawing.Point(0, 257)
+        Me.paSubItem.Name = "paSubItem"
+        Me.paSubItem.Size = New System.Drawing.Size(200, 183)
+        Me.paSubItem.TabIndex = 6
+        '
+        'Button12
+        '
+        Me.Button12.BackColor = System.Drawing.Color.Gray
+        Me.Button12.FlatAppearance.BorderSize = 0
+        Me.Button12.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+        Me.Button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button12.Font = New System.Drawing.Font("FC Active", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button12.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Button12.Location = New System.Drawing.Point(0, 136)
+        Me.Button12.Name = "Button12"
+        Me.Button12.Size = New System.Drawing.Size(200, 37)
+        Me.Button12.TabIndex = 5
+        Me.Button12.Text = "สินค้า"
+        Me.Button12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button12.UseVisualStyleBackColor = False
+        '
+        'Button11
+        '
+        Me.Button11.BackColor = System.Drawing.Color.Gray
+        Me.Button11.FlatAppearance.BorderSize = 0
+        Me.Button11.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+        Me.Button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button11.Font = New System.Drawing.Font("FC Active", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button11.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Button11.Location = New System.Drawing.Point(0, 90)
+        Me.Button11.Name = "Button11"
+        Me.Button11.Size = New System.Drawing.Size(200, 37)
+        Me.Button11.TabIndex = 4
+        Me.Button11.Text = "สินค้า"
+        Me.Button11.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button11.UseVisualStyleBackColor = False
+        '
+        'Button10
+        '
+        Me.Button10.BackColor = System.Drawing.Color.Gray
+        Me.Button10.FlatAppearance.BorderSize = 0
+        Me.Button10.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+        Me.Button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button10.Font = New System.Drawing.Font("FC Active", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button10.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Button10.Location = New System.Drawing.Point(0, 45)
+        Me.Button10.Name = "Button10"
+        Me.Button10.Size = New System.Drawing.Size(200, 37)
+        Me.Button10.TabIndex = 3
+        Me.Button10.Text = "เพิ่มสินค้า"
+        Me.Button10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button10.UseVisualStyleBackColor = False
+        '
+        'Button9
+        '
+        Me.Button9.BackColor = System.Drawing.Color.Gray
+        Me.Button9.FlatAppearance.BorderSize = 0
+        Me.Button9.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+        Me.Button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button9.Font = New System.Drawing.Font("FC Active", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button9.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Button9.Location = New System.Drawing.Point(0, 0)
+        Me.Button9.Name = "Button9"
+        Me.Button9.Size = New System.Drawing.Size(200, 37)
+        Me.Button9.TabIndex = 2
+        Me.Button9.Text = "ประเภทสินค้า"
+        Me.Button9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button9.UseVisualStyleBackColor = False
         '
         'Button6
         '
@@ -124,7 +224,7 @@ Partial Class frmMain
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(200, 61)
         Me.Button6.TabIndex = 5
-        Me.Button6.Text = "ข้อมูลพนักงาน"
+        Me.Button6.Text = "จัดการสินค้า"
         Me.Button6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button6.UseVisualStyleBackColor = True
         '
@@ -152,7 +252,7 @@ Partial Class frmMain
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(200, 61)
         Me.Button3.TabIndex = 2
-        Me.Button3.Text = "ข้อมูลพนักงาน"
+        Me.Button3.Text = "สั่งซื้อสินค้า"
         Me.Button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button3.UseVisualStyleBackColor = True
         '
@@ -170,19 +270,19 @@ Partial Class frmMain
         Me.Button5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button5.UseVisualStyleBackColor = True
         '
-        'Button2
+        'btnItem
         '
-        Me.Button2.FlatAppearance.BorderSize = 0
-        Me.Button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Font = New System.Drawing.Font("FC Active", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.Location = New System.Drawing.Point(3, 190)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(200, 61)
-        Me.Button2.TabIndex = 1
-        Me.Button2.Text = "ข้อมูลพนักงาน"
-        Me.Button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnItem.FlatAppearance.BorderSize = 0
+        Me.btnItem.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray
+        Me.btnItem.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnItem.Font = New System.Drawing.Font("FC Active", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnItem.Location = New System.Drawing.Point(3, 190)
+        Me.btnItem.Name = "btnItem"
+        Me.btnItem.Size = New System.Drawing.Size(200, 61)
+        Me.btnItem.TabIndex = 1
+        Me.btnItem.Text = "สินค้า"
+        Me.btnItem.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnItem.UseVisualStyleBackColor = True
         '
         'Button1
         '
@@ -294,6 +394,7 @@ Partial Class frmMain
         '
         'PaEmployee
         '
+        Me.PaEmployee.Controls.Add(Me.Button2)
         Me.PaEmployee.Controls.Add(Me.PictureBox8)
         Me.PaEmployee.Controls.Add(Me.txtPass)
         Me.PaEmployee.Controls.Add(Me.txtUser)
@@ -319,6 +420,20 @@ Partial Class frmMain
         Me.PaEmployee.Name = "PaEmployee"
         Me.PaEmployee.Size = New System.Drawing.Size(892, 608)
         Me.PaEmployee.TabIndex = 4
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(103, Byte), Integer))
+        Me.Button2.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(695, 355)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(176, 36)
+        Me.Button2.TabIndex = 23
+        Me.Button2.Text = "ยกเลิก"
+        Me.Button2.UseVisualStyleBackColor = False
         '
         'PictureBox8
         '
@@ -690,6 +805,20 @@ Partial Class frmMain
         Me.paEmAdmin.Size = New System.Drawing.Size(892, 608)
         Me.paEmAdmin.TabIndex = 5
         '
+        'Button8
+        '
+        Me.Button8.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(103, Byte), Integer))
+        Me.Button8.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Button8.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button8.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button8.Location = New System.Drawing.Point(685, 282)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(176, 36)
+        Me.Button8.TabIndex = 23
+        Me.Button8.Text = "แก้ไข"
+        Me.Button8.UseVisualStyleBackColor = False
+        '
         'txtEmpUser
         '
         Me.txtEmpUser.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
@@ -709,60 +838,9 @@ Partial Class frmMain
         Me.PicEmp.Location = New System.Drawing.Point(678, 18)
         Me.PicEmp.Name = "PicEmp"
         Me.PicEmp.Size = New System.Drawing.Size(194, 194)
+        Me.PicEmp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PicEmp.TabIndex = 1
         Me.PicEmp.TabStop = False
-        '
-        'dgvEmp
-        '
-        DataGridViewCellStyle11.BackColor = System.Drawing.Color.Gray
-        DataGridViewCellStyle11.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.Silver
-        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.White
-        Me.dgvEmp.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle11
-        Me.dgvEmp.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
-        Me.dgvEmp.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-        Me.dgvEmp.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(94, Byte), Integer))
-        Me.dgvEmp.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.dgvEmp.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical
-        Me.dgvEmp.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.InactiveCaptionText
-        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvEmp.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle12
-        Me.dgvEmp.ColumnHeadersHeight = 25
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.ScrollBar
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlDark
-        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.GrayText
-        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvEmp.DefaultCellStyle = DataGridViewCellStyle13
-        Me.dgvEmp.EnableHeadersVisualStyles = False
-        Me.dgvEmp.Location = New System.Drawing.Point(22, 18)
-        Me.dgvEmp.Name = "dgvEmp"
-        Me.dgvEmp.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
-        DataGridViewCellStyle14.Font = New System.Drawing.Font("FC Active", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle14.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
-        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
-        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvEmp.RowHeadersDefaultCellStyle = DataGridViewCellStyle14
-        DataGridViewCellStyle15.BackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle15.Font = New System.Drawing.Font("FC Active", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle15.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(91, Byte), Integer))
-        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
-        Me.dgvEmp.RowsDefaultCellStyle = DataGridViewCellStyle15
-        Me.dgvEmp.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvEmp.Size = New System.Drawing.Size(611, 571)
-        Me.dgvEmp.TabIndex = 0
         '
         'ShapeContainer2
         '
@@ -784,19 +862,211 @@ Partial Class frmMain
         Me.RectangleShape9.Name = "RectangleShape9"
         Me.RectangleShape9.Size = New System.Drawing.Size(176, 36)
         '
-        'Button8
+        'dgvEmp
         '
-        Me.Button8.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(103, Byte), Integer))
-        Me.Button8.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Button8.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button8.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button8.Location = New System.Drawing.Point(685, 282)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(176, 36)
-        Me.Button8.TabIndex = 23
-        Me.Button8.Text = "แก้ไข"
-        Me.Button8.UseVisualStyleBackColor = False
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.Gray
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Silver
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White
+        Me.dgvEmp.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
+        Me.dgvEmp.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
+        Me.dgvEmp.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.dgvEmp.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(94, Byte), Integer))
+        Me.dgvEmp.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.dgvEmp.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical
+        Me.dgvEmp.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.InactiveCaptionText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvEmp.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        Me.dgvEmp.ColumnHeadersHeight = 25
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ScrollBar
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlDark
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.GrayText
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvEmp.DefaultCellStyle = DataGridViewCellStyle3
+        Me.dgvEmp.EnableHeadersVisualStyles = False
+        Me.dgvEmp.Location = New System.Drawing.Point(22, 18)
+        Me.dgvEmp.Name = "dgvEmp"
+        Me.dgvEmp.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("FC Active", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvEmp.RowHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("FC Active", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(91, Byte), Integer))
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
+        Me.dgvEmp.RowsDefaultCellStyle = DataGridViewCellStyle5
+        Me.dgvEmp.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvEmp.Size = New System.Drawing.Size(611, 571)
+        Me.dgvEmp.TabIndex = 0
+        '
+        'paCate
+        '
+        Me.paCate.Controls.Add(Me.dgvCate)
+        Me.paCate.Controls.Add(Me.btnCateDelete)
+        Me.paCate.Controls.Add(Me.btnCateCancle)
+        Me.paCate.Controls.Add(Me.btnCateEdit)
+        Me.paCate.Controls.Add(Me.btnCateAdd)
+        Me.paCate.Controls.Add(Me.btnCateSave)
+        Me.paCate.Controls.Add(Me.Label9)
+        Me.paCate.Controls.Add(Me.txtCateNa)
+        Me.paCate.Location = New System.Drawing.Point(199, 49)
+        Me.paCate.Name = "paCate"
+        Me.paCate.Size = New System.Drawing.Size(892, 608)
+        Me.paCate.TabIndex = 6
+        '
+        'btnCateDelete
+        '
+        Me.btnCateDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(103, Byte), Integer))
+        Me.btnCateDelete.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCateDelete.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.btnCateDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCateDelete.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCateDelete.Location = New System.Drawing.Point(703, 367)
+        Me.btnCateDelete.Name = "btnCateDelete"
+        Me.btnCateDelete.Size = New System.Drawing.Size(176, 36)
+        Me.btnCateDelete.TabIndex = 30
+        Me.btnCateDelete.Text = "ลบ"
+        Me.btnCateDelete.UseVisualStyleBackColor = False
+        '
+        'btnCateCancle
+        '
+        Me.btnCateCancle.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(103, Byte), Integer))
+        Me.btnCateCancle.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCateCancle.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.btnCateCancle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCateCancle.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCateCancle.Location = New System.Drawing.Point(703, 312)
+        Me.btnCateCancle.Name = "btnCateCancle"
+        Me.btnCateCancle.Size = New System.Drawing.Size(176, 36)
+        Me.btnCateCancle.TabIndex = 29
+        Me.btnCateCancle.Text = "ยกเลิก"
+        Me.btnCateCancle.UseVisualStyleBackColor = False
+        '
+        'btnCateEdit
+        '
+        Me.btnCateEdit.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(103, Byte), Integer))
+        Me.btnCateEdit.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCateEdit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.btnCateEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCateEdit.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCateEdit.Location = New System.Drawing.Point(703, 253)
+        Me.btnCateEdit.Name = "btnCateEdit"
+        Me.btnCateEdit.Size = New System.Drawing.Size(176, 36)
+        Me.btnCateEdit.TabIndex = 28
+        Me.btnCateEdit.Text = "แก้ไข"
+        Me.btnCateEdit.UseVisualStyleBackColor = False
+        '
+        'btnCateAdd
+        '
+        Me.btnCateAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(103, Byte), Integer))
+        Me.btnCateAdd.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCateAdd.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.btnCateAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCateAdd.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCateAdd.Location = New System.Drawing.Point(703, 197)
+        Me.btnCateAdd.Name = "btnCateAdd"
+        Me.btnCateAdd.Size = New System.Drawing.Size(176, 36)
+        Me.btnCateAdd.TabIndex = 27
+        Me.btnCateAdd.Text = "เพิ่ม"
+        Me.btnCateAdd.UseVisualStyleBackColor = False
+        '
+        'btnCateSave
+        '
+        Me.btnCateSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(103, Byte), Integer))
+        Me.btnCateSave.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnCateSave.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.btnCateSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCateSave.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCateSave.Location = New System.Drawing.Point(703, 423)
+        Me.btnCateSave.Name = "btnCateSave"
+        Me.btnCateSave.Size = New System.Drawing.Size(176, 36)
+        Me.btnCateSave.TabIndex = 26
+        Me.btnCateSave.Text = "บันทึก"
+        Me.btnCateSave.UseVisualStyleBackColor = False
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.ForeColor = System.Drawing.Color.White
+        Me.Label9.Location = New System.Drawing.Point(164, 115)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(97, 20)
+        Me.Label9.TabIndex = 25
+        Me.Label9.Text = "ประเภทสินค้า"
+        '
+        'txtCateNa
+        '
+        Me.txtCateNa.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCateNa.Location = New System.Drawing.Point(303, 107)
+        Me.txtCateNa.Name = "txtCateNa"
+        Me.txtCateNa.Size = New System.Drawing.Size(213, 28)
+        Me.txtCateNa.TabIndex = 24
+        '
+        'dgvCate
+        '
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.Gray
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Silver
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White
+        Me.dgvCate.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle6
+        Me.dgvCate.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(94, Byte), Integer))
+        Me.dgvCate.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.dgvCate.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical
+        Me.dgvCate.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.InactiveCaptionText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvCate.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
+        Me.dgvCate.ColumnHeadersHeight = 25
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.ScrollBar
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlDark
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.GrayText
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvCate.DefaultCellStyle = DataGridViewCellStyle8
+        Me.dgvCate.EnableHeadersVisualStyles = False
+        Me.dgvCate.Location = New System.Drawing.Point(163, 176)
+        Me.dgvCate.Name = "dgvCate"
+        Me.dgvCate.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("FC Active", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
+        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvCate.RowHeadersDefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("FC Active", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(91, Byte), Integer))
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
+        Me.dgvCate.RowsDefaultCellStyle = DataGridViewCellStyle10
+        Me.dgvCate.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvCate.Size = New System.Drawing.Size(412, 343)
+        Me.dgvCate.TabIndex = 31
         '
         'frmMain
         '
@@ -807,12 +1077,14 @@ Partial Class frmMain
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.paUser)
         Me.Controls.Add(Me.paAdmin)
+        Me.Controls.Add(Me.paCate)
         Me.Controls.Add(Me.paEmAdmin)
         Me.Controls.Add(Me.PaEmployee)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmMain"
         Me.Text = "Form2"
         Me.Panel1.ResumeLayout(False)
+        Me.paSubItem.ResumeLayout(False)
         Me.paUser.ResumeLayout(False)
         Me.paUser.PerformLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
@@ -833,6 +1105,9 @@ Partial Class frmMain
         Me.paEmAdmin.PerformLayout()
         CType(Me.PicEmp, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvEmp, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.paCate.ResumeLayout(False)
+        Me.paCate.PerformLayout()
+        CType(Me.dgvCate, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -846,7 +1121,7 @@ Partial Class frmMain
     Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
     Friend WithEvents PictureBox4 As System.Windows.Forms.PictureBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents btnItem As System.Windows.Forms.Button
     Friend WithEvents Button6 As System.Windows.Forms.Button
     Friend WithEvents Button4 As System.Windows.Forms.Button
     Friend WithEvents Button3 As System.Windows.Forms.Button
@@ -890,4 +1165,19 @@ Partial Class frmMain
     Friend WithEvents ShapeContainer2 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
     Friend WithEvents RectangleShape9 As Microsoft.VisualBasic.PowerPacks.RectangleShape
     Friend WithEvents Button8 As System.Windows.Forms.Button
+    Friend WithEvents paSubItem As System.Windows.Forms.Panel
+    Friend WithEvents Button9 As System.Windows.Forms.Button
+    Friend WithEvents Button12 As System.Windows.Forms.Button
+    Friend WithEvents Button11 As System.Windows.Forms.Button
+    Friend WithEvents Button10 As System.Windows.Forms.Button
+    Friend WithEvents paCate As System.Windows.Forms.Panel
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents txtCateNa As System.Windows.Forms.TextBox
+    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents btnCateSave As System.Windows.Forms.Button
+    Friend WithEvents btnCateAdd As System.Windows.Forms.Button
+    Friend WithEvents btnCateCancle As System.Windows.Forms.Button
+    Friend WithEvents btnCateEdit As System.Windows.Forms.Button
+    Friend WithEvents btnCateDelete As System.Windows.Forms.Button
+    Friend WithEvents dgvCate As System.Windows.Forms.DataGridView
 End Class
