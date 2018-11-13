@@ -22,7 +22,6 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -33,6 +32,7 @@ Partial Class frmMain
         Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.paSubItem = New System.Windows.Forms.Panel()
         Me.Button12 = New System.Windows.Forms.Button()
@@ -44,18 +44,12 @@ Partial Class frmMain
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.btnItem = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.paUser = New System.Windows.Forms.Panel()
-        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.paAdmin = New System.Windows.Forms.Panel()
-        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.PaEmployee = New System.Windows.Forms.Panel()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.PictureBox8 = New System.Windows.Forms.PictureBox()
         Me.txtPass = New System.Windows.Forms.TextBox()
         Me.txtUser = New System.Windows.Forms.TextBox()
         Me.Button7 = New System.Windows.Forms.Button()
@@ -66,9 +60,7 @@ Partial Class frmMain
         Me.rdbAdmin = New System.Windows.Forms.RadioButton()
         Me.rdbUser = New System.Windows.Forms.RadioButton()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.PictureBox7 = New System.Windows.Forms.PictureBox()
         Me.rdbWomen = New System.Windows.Forms.RadioButton()
-        Me.PictureBox6 = New System.Windows.Forms.PictureBox()
         Me.rdbMen = New System.Windows.Forms.RadioButton()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -76,7 +68,6 @@ Partial Class frmMain
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtNa = New System.Windows.Forms.TextBox()
-        Me.PicUser = New System.Windows.Forms.PictureBox()
         Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.RectangleShape8 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         Me.RectangleShape7 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
@@ -87,13 +78,16 @@ Partial Class frmMain
         Me.RectangleShape2 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         Me.RectangleShape1 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         Me.paEmAdmin = New System.Windows.Forms.Panel()
-        Me.Button8 = New System.Windows.Forms.Button()
+        Me.btnEmpAadd = New System.Windows.Forms.Button()
+        Me.btnEmpAdelete = New System.Windows.Forms.Button()
+        Me.btnEmpAcancle = New System.Windows.Forms.Button()
+        Me.btnEmpAedit = New System.Windows.Forms.Button()
         Me.txtEmpUser = New System.Windows.Forms.TextBox()
-        Me.PicEmp = New System.Windows.Forms.PictureBox()
         Me.ShapeContainer2 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
         Me.RectangleShape9 = New Microsoft.VisualBasic.PowerPacks.RectangleShape()
         Me.dgvEmp = New System.Windows.Forms.DataGridView()
         Me.paCate = New System.Windows.Forms.Panel()
+        Me.dgvCate = New System.Windows.Forms.DataGridView()
         Me.btnCateDelete = New System.Windows.Forms.Button()
         Me.btnCateCancle = New System.Windows.Forms.Button()
         Me.btnCateEdit = New System.Windows.Forms.Button()
@@ -101,31 +95,45 @@ Partial Class frmMain
         Me.btnCateSave = New System.Windows.Forms.Button()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.txtCateNa = New System.Windows.Forms.TextBox()
-        Me.dgvCate = New System.Windows.Forms.DataGridView()
+        Me.Button14 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.btnEmpClose = New System.Windows.Forms.Button()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.PictureBox8 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox7 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox6 = New System.Windows.Forms.PictureBox()
+        Me.PicUser = New System.Windows.Forms.PictureBox()
+        Me.Button13 = New System.Windows.Forms.Button()
+        Me.PicEmp = New System.Windows.Forms.PictureBox()
         Me.Panel1.SuspendLayout()
         Me.paSubItem.SuspendLayout()
         Me.paUser.SuspendLayout()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.paAdmin.SuspendLayout()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PaEmployee.SuspendLayout()
-        CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel4.SuspendLayout()
-        CType(Me.PictureBox7, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PicUser, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.paEmAdmin.SuspendLayout()
-        CType(Me.PicEmp, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvEmp, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.paCate.SuspendLayout()
         CType(Me.dgvCate, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox7, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PicUser, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PicEmp, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.Button14)
         Me.Panel1.Controls.Add(Me.paSubItem)
         Me.Panel1.Controls.Add(Me.Button6)
         Me.Panel1.Controls.Add(Me.Button4)
@@ -284,22 +292,6 @@ Partial Class frmMain
         Me.btnItem.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnItem.UseVisualStyleBackColor = True
         '
-        'Button1
-        '
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Font = New System.Drawing.Font("FC Active", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Image = Global.Flat1.My.Resources.Resources.icons8_administrator_male_48
-        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(0, 123)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(200, 61)
-        Me.Button1.TabIndex = 0
-        Me.Button1.Text = "ข้อมูลพนักงาน"
-        Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'paUser
         '
         Me.paUser.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
@@ -310,17 +302,6 @@ Partial Class frmMain
         Me.paUser.Name = "paUser"
         Me.paUser.Size = New System.Drawing.Size(892, 49)
         Me.paUser.TabIndex = 2
-        '
-        'PictureBox4
-        '
-        Me.PictureBox4.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox4.Image = Global.Flat1.My.Resources.Resources.icons8_user_account_filled_500
-        Me.PictureBox4.Location = New System.Drawing.Point(302, -1)
-        Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(50, 50)
-        Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox4.TabIndex = 3
-        Me.PictureBox4.TabStop = False
         '
         'Label2
         '
@@ -334,18 +315,6 @@ Partial Class frmMain
         Me.Label2.TabIndex = 2
         Me.Label2.Text = "User"
         '
-        'PictureBox1
-        '
-        Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(852, 10)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(30, 30)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 0
-        Me.PictureBox1.TabStop = False
-        '
         'paAdmin
         '
         Me.paAdmin.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
@@ -356,17 +325,6 @@ Partial Class frmMain
         Me.paAdmin.Name = "paAdmin"
         Me.paAdmin.Size = New System.Drawing.Size(892, 49)
         Me.paAdmin.TabIndex = 3
-        '
-        'PictureBox3
-        '
-        Me.PictureBox3.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox3.Image = Global.Flat1.My.Resources.Resources.icons8_businessman_506
-        Me.PictureBox3.Location = New System.Drawing.Point(302, 0)
-        Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(50, 50)
-        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox3.TabIndex = 2
-        Me.PictureBox3.TabStop = False
         '
         'Label1
         '
@@ -380,20 +338,10 @@ Partial Class frmMain
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Admin"
         '
-        'PictureBox2
-        '
-        Me.PictureBox2.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox2.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(852, 10)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(30, 30)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox2.TabIndex = 0
-        Me.PictureBox2.TabStop = False
-        '
         'PaEmployee
         '
+        Me.PaEmployee.Controls.Add(Me.btnEmpClose)
+        Me.PaEmployee.Controls.Add(Me.Button8)
         Me.PaEmployee.Controls.Add(Me.Button2)
         Me.PaEmployee.Controls.Add(Me.PictureBox8)
         Me.PaEmployee.Controls.Add(Me.txtPass)
@@ -435,18 +383,6 @@ Partial Class frmMain
         Me.Button2.Text = "ยกเลิก"
         Me.Button2.UseVisualStyleBackColor = False
         '
-        'PictureBox8
-        '
-        Me.PictureBox8.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.PictureBox8.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.PictureBox8.Image = Global.Flat1.My.Resources.Resources.icons8_compose_filled_50
-        Me.PictureBox8.Location = New System.Drawing.Point(859, 6)
-        Me.PictureBox8.Name = "PictureBox8"
-        Me.PictureBox8.Size = New System.Drawing.Size(20, 20)
-        Me.PictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox8.TabIndex = 22
-        Me.PictureBox8.TabStop = False
-        '
         'txtPass
         '
         Me.txtPass.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
@@ -455,6 +391,7 @@ Partial Class frmMain
         Me.txtPass.ForeColor = System.Drawing.Color.White
         Me.txtPass.Location = New System.Drawing.Point(707, 261)
         Me.txtPass.Name = "txtPass"
+        Me.txtPass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(35)
         Me.txtPass.Size = New System.Drawing.Size(153, 21)
         Me.txtPass.TabIndex = 21
         Me.txtPass.Text = "Password"
@@ -576,17 +513,6 @@ Partial Class frmMain
         Me.Label7.TabIndex = 14
         Me.Label7.Text = "ระดับ"
         '
-        'PictureBox7
-        '
-        Me.PictureBox7.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.PictureBox7.Image = Global.Flat1.My.Resources.Resources.icons8_businesswoman_80
-        Me.PictureBox7.Location = New System.Drawing.Point(267, 122)
-        Me.PictureBox7.Name = "PictureBox7"
-        Me.PictureBox7.Size = New System.Drawing.Size(30, 30)
-        Me.PictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox7.TabIndex = 11
-        Me.PictureBox7.TabStop = False
-        '
         'rdbWomen
         '
         Me.rdbWomen.AutoSize = True
@@ -601,17 +527,6 @@ Partial Class frmMain
         Me.rdbWomen.TabStop = True
         Me.rdbWomen.Text = "หญิง / Women"
         Me.rdbWomen.UseVisualStyleBackColor = False
-        '
-        'PictureBox6
-        '
-        Me.PictureBox6.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.PictureBox6.Image = Global.Flat1.My.Resources.Resources.icons8_user_80
-        Me.PictureBox6.Location = New System.Drawing.Point(108, 123)
-        Me.PictureBox6.Name = "PictureBox6"
-        Me.PictureBox6.Size = New System.Drawing.Size(30, 30)
-        Me.PictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox6.TabIndex = 9
-        Me.PictureBox6.TabStop = False
         '
         'rdbMen
         '
@@ -692,16 +607,6 @@ Partial Class frmMain
         Me.txtNa.Name = "txtNa"
         Me.txtNa.Size = New System.Drawing.Size(153, 19)
         Me.txtNa.TabIndex = 1
-        '
-        'PicUser
-        '
-        Me.PicUser.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.PicUser.Location = New System.Drawing.Point(685, 6)
-        Me.PicUser.Name = "PicUser"
-        Me.PicUser.Size = New System.Drawing.Size(194, 194)
-        Me.PicUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PicUser.TabIndex = 0
-        Me.PicUser.TabStop = False
         '
         'ShapeContainer1
         '
@@ -795,7 +700,11 @@ Partial Class frmMain
         '
         'paEmAdmin
         '
-        Me.paEmAdmin.Controls.Add(Me.Button8)
+        Me.paEmAdmin.Controls.Add(Me.Button13)
+        Me.paEmAdmin.Controls.Add(Me.btnEmpAadd)
+        Me.paEmAdmin.Controls.Add(Me.btnEmpAdelete)
+        Me.paEmAdmin.Controls.Add(Me.btnEmpAcancle)
+        Me.paEmAdmin.Controls.Add(Me.btnEmpAedit)
         Me.paEmAdmin.Controls.Add(Me.txtEmpUser)
         Me.paEmAdmin.Controls.Add(Me.PicEmp)
         Me.paEmAdmin.Controls.Add(Me.ShapeContainer2)
@@ -805,19 +714,61 @@ Partial Class frmMain
         Me.paEmAdmin.Size = New System.Drawing.Size(892, 608)
         Me.paEmAdmin.TabIndex = 5
         '
-        'Button8
+        'btnEmpAadd
         '
-        Me.Button8.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(103, Byte), Integer))
-        Me.Button8.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.Button8.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.Button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button8.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button8.Location = New System.Drawing.Point(685, 282)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(176, 36)
-        Me.Button8.TabIndex = 23
-        Me.Button8.Text = "แก้ไข"
-        Me.Button8.UseVisualStyleBackColor = False
+        Me.btnEmpAadd.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(103, Byte), Integer))
+        Me.btnEmpAadd.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnEmpAadd.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.btnEmpAadd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEmpAadd.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEmpAadd.Location = New System.Drawing.Point(685, 288)
+        Me.btnEmpAadd.Name = "btnEmpAadd"
+        Me.btnEmpAadd.Size = New System.Drawing.Size(176, 36)
+        Me.btnEmpAadd.TabIndex = 26
+        Me.btnEmpAadd.Text = "เพิ่ม"
+        Me.btnEmpAadd.UseVisualStyleBackColor = False
+        '
+        'btnEmpAdelete
+        '
+        Me.btnEmpAdelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(103, Byte), Integer))
+        Me.btnEmpAdelete.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnEmpAdelete.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.btnEmpAdelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEmpAdelete.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEmpAdelete.Location = New System.Drawing.Point(684, 402)
+        Me.btnEmpAdelete.Name = "btnEmpAdelete"
+        Me.btnEmpAdelete.Size = New System.Drawing.Size(176, 36)
+        Me.btnEmpAdelete.TabIndex = 25
+        Me.btnEmpAdelete.Text = "ลบ"
+        Me.btnEmpAdelete.UseVisualStyleBackColor = False
+        '
+        'btnEmpAcancle
+        '
+        Me.btnEmpAcancle.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(103, Byte), Integer))
+        Me.btnEmpAcancle.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnEmpAcancle.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.btnEmpAcancle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEmpAcancle.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEmpAcancle.Location = New System.Drawing.Point(684, 457)
+        Me.btnEmpAcancle.Name = "btnEmpAcancle"
+        Me.btnEmpAcancle.Size = New System.Drawing.Size(176, 36)
+        Me.btnEmpAcancle.TabIndex = 24
+        Me.btnEmpAcancle.Text = "ยกเลิก"
+        Me.btnEmpAcancle.UseVisualStyleBackColor = False
+        '
+        'btnEmpAedit
+        '
+        Me.btnEmpAedit.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(103, Byte), Integer))
+        Me.btnEmpAedit.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnEmpAedit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.btnEmpAedit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEmpAedit.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEmpAedit.Location = New System.Drawing.Point(685, 342)
+        Me.btnEmpAedit.Name = "btnEmpAedit"
+        Me.btnEmpAedit.Size = New System.Drawing.Size(176, 36)
+        Me.btnEmpAedit.TabIndex = 23
+        Me.btnEmpAedit.Text = "แก้ไข"
+        Me.btnEmpAedit.UseVisualStyleBackColor = False
         '
         'txtEmpUser
         '
@@ -831,16 +782,6 @@ Partial Class frmMain
         Me.txtEmpUser.TabIndex = 21
         Me.txtEmpUser.Text = "Username"
         Me.txtEmpUser.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'PicEmp
-        '
-        Me.PicEmp.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
-        Me.PicEmp.Location = New System.Drawing.Point(678, 18)
-        Me.PicEmp.Name = "PicEmp"
-        Me.PicEmp.Size = New System.Drawing.Size(194, 194)
-        Me.PicEmp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PicEmp.TabIndex = 1
-        Me.PicEmp.TabStop = False
         '
         'ShapeContainer2
         '
@@ -928,6 +869,56 @@ Partial Class frmMain
         Me.paCate.Name = "paCate"
         Me.paCate.Size = New System.Drawing.Size(892, 608)
         Me.paCate.TabIndex = 6
+        '
+        'dgvCate
+        '
+        DataGridViewCellStyle6.BackColor = System.Drawing.Color.Gray
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Silver
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White
+        Me.dgvCate.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle6
+        Me.dgvCate.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(94, Byte), Integer))
+        Me.dgvCate.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.dgvCate.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical
+        Me.dgvCate.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.InactiveCaptionText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvCate.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
+        Me.dgvCate.ColumnHeadersHeight = 25
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.ScrollBar
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlDark
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.GrayText
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgvCate.DefaultCellStyle = DataGridViewCellStyle8
+        Me.dgvCate.EnableHeadersVisualStyles = False
+        Me.dgvCate.Location = New System.Drawing.Point(163, 176)
+        Me.dgvCate.Name = "dgvCate"
+        Me.dgvCate.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("FC Active", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
+        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvCate.RowHeadersDefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(94, Byte), Integer))
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("FC Active", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.White
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(91, Byte), Integer))
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
+        Me.dgvCate.RowsDefaultCellStyle = DataGridViewCellStyle10
+        Me.dgvCate.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.dgvCate.Size = New System.Drawing.Size(412, 343)
+        Me.dgvCate.TabIndex = 31
         '
         'btnCateDelete
         '
@@ -1018,55 +1009,177 @@ Partial Class frmMain
         Me.txtCateNa.Size = New System.Drawing.Size(213, 28)
         Me.txtCateNa.TabIndex = 24
         '
-        'dgvCate
+        'Button14
         '
-        DataGridViewCellStyle6.BackColor = System.Drawing.Color.Gray
-        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Silver
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.White
-        Me.dgvCate.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle6
-        Me.dgvCate.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(94, Byte), Integer))
-        Me.dgvCate.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.dgvCate.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleVertical
-        Me.dgvCate.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.InactiveCaptionText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvCate.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
-        Me.dgvCate.ColumnHeadersHeight = 25
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.ScrollBar
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlDark
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.GrayText
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgvCate.DefaultCellStyle = DataGridViewCellStyle8
-        Me.dgvCate.EnableHeadersVisualStyles = False
-        Me.dgvCate.Location = New System.Drawing.Point(163, 176)
-        Me.dgvCate.Name = "dgvCate"
-        Me.dgvCate.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("FC Active", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle9.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
-        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
-        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvCate.RowHeadersDefaultCellStyle = DataGridViewCellStyle9
-        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(94, Byte), Integer))
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("FC Active", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle10.ForeColor = System.Drawing.Color.White
-        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(CType(CType(43, Byte), Integer), CType(CType(56, Byte), Integer), CType(CType(91, Byte), Integer))
-        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
-        Me.dgvCate.RowsDefaultCellStyle = DataGridViewCellStyle10
-        Me.dgvCate.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvCate.Size = New System.Drawing.Size(412, 343)
-        Me.dgvCate.TabIndex = 31
+        Me.Button14.BackColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
+        Me.Button14.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Button14.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(243, Byte), Integer), CType(CType(156, Byte), Integer), CType(CType(18, Byte), Integer))
+        Me.Button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button14.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button14.Image = Global.Flat1.My.Resources.Resources.icons8_exit_filled_50
+        Me.Button14.Location = New System.Drawing.Point(143, 603)
+        Me.Button14.Name = "Button14"
+        Me.Button14.Size = New System.Drawing.Size(56, 56)
+        Me.Button14.TabIndex = 20
+        Me.Button14.UseVisualStyleBackColor = False
+        '
+        'Button1
+        '
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gray
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Font = New System.Drawing.Font("FC Active", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Image = Global.Flat1.My.Resources.Resources.icons8_administrator_male_48
+        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button1.Location = New System.Drawing.Point(0, 123)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(200, 61)
+        Me.Button1.TabIndex = 0
+        Me.Button1.Text = "ข้อมูลพนักงาน"
+        Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'PictureBox4
+        '
+        Me.PictureBox4.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox4.Image = Global.Flat1.My.Resources.Resources.icons8_user_account_filled_500
+        Me.PictureBox4.Location = New System.Drawing.Point(302, -1)
+        Me.PictureBox4.Name = "PictureBox4"
+        Me.PictureBox4.Size = New System.Drawing.Size(50, 50)
+        Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox4.TabIndex = 3
+        Me.PictureBox4.TabStop = False
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
+        Me.PictureBox1.Location = New System.Drawing.Point(852, 10)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(30, 30)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 0
+        Me.PictureBox1.TabStop = False
+        '
+        'PictureBox3
+        '
+        Me.PictureBox3.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox3.Image = Global.Flat1.My.Resources.Resources.icons8_businessman_506
+        Me.PictureBox3.Location = New System.Drawing.Point(302, 0)
+        Me.PictureBox3.Name = "PictureBox3"
+        Me.PictureBox3.Size = New System.Drawing.Size(50, 50)
+        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox3.TabIndex = 2
+        Me.PictureBox3.TabStop = False
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox2.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
+        Me.PictureBox2.Location = New System.Drawing.Point(852, 10)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(30, 30)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox2.TabIndex = 0
+        Me.PictureBox2.TabStop = False
+        '
+        'btnEmpClose
+        '
+        Me.btnEmpClose.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(103, Byte), Integer))
+        Me.btnEmpClose.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnEmpClose.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.btnEmpClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEmpClose.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEmpClose.Image = Global.Flat1.My.Resources.Resources.icons8_cancel_48
+        Me.btnEmpClose.Location = New System.Drawing.Point(854, 574)
+        Me.btnEmpClose.Name = "btnEmpClose"
+        Me.btnEmpClose.Size = New System.Drawing.Size(25, 25)
+        Me.btnEmpClose.TabIndex = 28
+        Me.btnEmpClose.UseVisualStyleBackColor = False
+        '
+        'Button8
+        '
+        Me.Button8.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.Button8.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Button8.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.Button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button8.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button8.Image = Global.Flat1.My.Resources.Resources.icons8_hide_24
+        Me.Button8.Location = New System.Drawing.Point(838, 256)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(30, 30)
+        Me.Button8.TabIndex = 25
+        Me.Button8.UseVisualStyleBackColor = False
+        '
+        'PictureBox8
+        '
+        Me.PictureBox8.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.PictureBox8.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.PictureBox8.Image = Global.Flat1.My.Resources.Resources.icons8_compose_filled_50
+        Me.PictureBox8.Location = New System.Drawing.Point(859, 6)
+        Me.PictureBox8.Name = "PictureBox8"
+        Me.PictureBox8.Size = New System.Drawing.Size(20, 20)
+        Me.PictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox8.TabIndex = 22
+        Me.PictureBox8.TabStop = False
+        '
+        'PictureBox7
+        '
+        Me.PictureBox7.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.PictureBox7.Image = Global.Flat1.My.Resources.Resources.icons8_businesswoman_80
+        Me.PictureBox7.Location = New System.Drawing.Point(267, 122)
+        Me.PictureBox7.Name = "PictureBox7"
+        Me.PictureBox7.Size = New System.Drawing.Size(30, 30)
+        Me.PictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox7.TabIndex = 11
+        Me.PictureBox7.TabStop = False
+        '
+        'PictureBox6
+        '
+        Me.PictureBox6.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.PictureBox6.Image = Global.Flat1.My.Resources.Resources.icons8_user_80
+        Me.PictureBox6.Location = New System.Drawing.Point(108, 123)
+        Me.PictureBox6.Name = "PictureBox6"
+        Me.PictureBox6.Size = New System.Drawing.Size(30, 30)
+        Me.PictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox6.TabIndex = 9
+        Me.PictureBox6.TabStop = False
+        '
+        'PicUser
+        '
+        Me.PicUser.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.PicUser.Location = New System.Drawing.Point(685, 6)
+        Me.PicUser.Name = "PicUser"
+        Me.PicUser.Size = New System.Drawing.Size(194, 194)
+        Me.PicUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PicUser.TabIndex = 0
+        Me.PicUser.TabStop = False
+        '
+        'Button13
+        '
+        Me.Button13.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(103, Byte), Integer), CType(CType(103, Byte), Integer))
+        Me.Button13.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.Button13.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
+        Me.Button13.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button13.Font = New System.Drawing.Font("FC Active", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button13.Image = Global.Flat1.My.Resources.Resources.icons8_cancel_48
+        Me.Button13.Location = New System.Drawing.Point(859, 574)
+        Me.Button13.Name = "Button13"
+        Me.Button13.Size = New System.Drawing.Size(25, 25)
+        Me.Button13.TabIndex = 27
+        Me.Button13.UseVisualStyleBackColor = False
+        '
+        'PicEmp
+        '
+        Me.PicEmp.BackColor = System.Drawing.Color.FromArgb(CType(CType(44, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.PicEmp.Location = New System.Drawing.Point(678, 18)
+        Me.PicEmp.Name = "PicEmp"
+        Me.PicEmp.Size = New System.Drawing.Size(194, 194)
+        Me.PicEmp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PicEmp.TabIndex = 1
+        Me.PicEmp.TabStop = False
         '
         'frmMain
         '
@@ -1077,9 +1190,9 @@ Partial Class frmMain
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.paUser)
         Me.Controls.Add(Me.paAdmin)
+        Me.Controls.Add(Me.PaEmployee)
         Me.Controls.Add(Me.paCate)
         Me.Controls.Add(Me.paEmAdmin)
-        Me.Controls.Add(Me.PaEmployee)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmMain"
         Me.Text = "Form2"
@@ -1087,27 +1200,27 @@ Partial Class frmMain
         Me.paSubItem.ResumeLayout(False)
         Me.paUser.ResumeLayout(False)
         Me.paUser.PerformLayout()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.paAdmin.ResumeLayout(False)
         Me.paAdmin.PerformLayout()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PaEmployee.ResumeLayout(False)
         Me.PaEmployee.PerformLayout()
-        CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
-        CType(Me.PictureBox7, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PicUser, System.ComponentModel.ISupportInitialize).EndInit()
         Me.paEmAdmin.ResumeLayout(False)
         Me.paEmAdmin.PerformLayout()
-        CType(Me.PicEmp, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvEmp, System.ComponentModel.ISupportInitialize).EndInit()
         Me.paCate.ResumeLayout(False)
         Me.paCate.PerformLayout()
         CType(Me.dgvCate, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox7, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PicUser, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PicEmp, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1164,7 +1277,7 @@ Partial Class frmMain
     Friend WithEvents txtEmpUser As System.Windows.Forms.TextBox
     Friend WithEvents ShapeContainer2 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
     Friend WithEvents RectangleShape9 As Microsoft.VisualBasic.PowerPacks.RectangleShape
-    Friend WithEvents Button8 As System.Windows.Forms.Button
+    Friend WithEvents btnEmpAedit As System.Windows.Forms.Button
     Friend WithEvents paSubItem As System.Windows.Forms.Panel
     Friend WithEvents Button9 As System.Windows.Forms.Button
     Friend WithEvents Button12 As System.Windows.Forms.Button
@@ -1180,4 +1293,11 @@ Partial Class frmMain
     Friend WithEvents btnCateEdit As System.Windows.Forms.Button
     Friend WithEvents btnCateDelete As System.Windows.Forms.Button
     Friend WithEvents dgvCate As System.Windows.Forms.DataGridView
+    Friend WithEvents btnEmpAdelete As System.Windows.Forms.Button
+    Friend WithEvents btnEmpAcancle As System.Windows.Forms.Button
+    Friend WithEvents Button8 As System.Windows.Forms.Button
+    Friend WithEvents btnEmpAadd As System.Windows.Forms.Button
+    Friend WithEvents Button13 As System.Windows.Forms.Button
+    Friend WithEvents btnEmpClose As System.Windows.Forms.Button
+    Friend WithEvents Button14 As System.Windows.Forms.Button
 End Class

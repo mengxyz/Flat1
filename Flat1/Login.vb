@@ -79,4 +79,16 @@ Public Class Login
             Button1.PerformClick()
         End If
     End Sub
+
+    Private Sub txtPass_Click(sender As Object, e As EventArgs) Handles txtPass.Click
+        txtPass.PasswordChar = "*"
+    End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        If txtPass.PasswordChar = "*" Then
+            txtPass.PasswordChar = ""
+        ElseIf txtPass.PasswordChar = ControlChars.NullChar Then
+            txtPass.PasswordChar = "*"
+        End If
+    End Sub
 End Class
