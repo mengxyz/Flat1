@@ -15,7 +15,6 @@ Public Class frmMain
         paCate.Visible = False
     End Sub
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        paSubItem.Visible = False
         If User_Status = "0" Then
             paAdmin.Visible = True
             paUser.Visible = False
@@ -110,6 +109,97 @@ Public Class frmMain
             .Columns(5).HeaderText = "ระดับ"
         End With
     End Sub
+    Sub Customer(ByVal x As Integer)
+        Module1.Connect()
+        Dim sql As String
+        Dim sqlcmd As SqlCommand
+        If x = 0 Then
+            sql = "insert into Customer (C_ID,Fname,Lname,Tel,[Add]) values ('" & txtMID.Text & "','" & txtMfNa.Text & "','" & txtMlNa.Text & "','" & txtMTel.Text & "','" & txtMAdd.Text & "') "
+        End If
+        sqlcmd = New SqlCommand(sql, Conn)
+        sqlcmd.ExecuteNonQuery()
+        MetroFramework.MetroMessageBox.Show(Me, "บันทึกเสร็จเรียบร้อย", "", MessageBoxButtons.OK, MessageBoxIcon.Question)
+        Conn.Close()
+    End Sub
+
+    Sub Product(ByRef x As Integer)
+        Module1.Connect()
+        Dim sql As String
+        Dim sqlcmd As SqlCommand
+        If x = 0 Then
+            sql = "insert into Product (P_ID,Name,Brand,Price,Amount,Ca_ID) values ('" & txtMID.Text & "','" & txtMfNa.Text & "','" & txtMlNa.Text & "','" & txtMTel.Text & "','" & txtMAdd.Text & "') "
+        End If
+    End Sub
+    Sub productshowdata()
+        Module1.Connect()
+        Dim sql As String = "select p.P_ID,p.Name,p.Amount,p.Price,c.C_Na from Product p,Category c where p.C_ID = c.C_ID"
+        Dim ds As New DataSet
+        Dim da As New SqlDataAdapter(sql, Conn)
+        da.Fill(ds, "Pro")
+        dgvProduct.ReadOnly = True
+        dgvProduct.DataSource = ds.Tables("Pro")
+    End Sub
+    Sub Customershowdata()
+        Module1.Connect()
+        Dim sql As String = "select C_ID,Fname,Lname,Tel from Customer"
+        Dim ds As New DataSet
+        Dim da As New SqlDataAdapter(sql, Conn)
+        da.Fill(ds, "Cus")
+        dgvMember.ReadOnly = True
+        dgvMember.DataSource = ds.Tables("Cus")
+        dgvMember.Columns(0).HeaderText = "รหัส"
+        dgvMember.Columns(0).Width = 100
+        dgvMember.Columns(1).HeaderText = "ชื่อ"
+        dgvMember.Columns(1).Width = 195
+        dgvMember.Columns(2).HeaderText = "นามสกุล"
+        dgvMember.Columns(2).Width = 195
+        dgvMember.Columns(3).HeaderText = "เบอร์โทร"
+        dgvMember.Columns(3).Width = 130
+        Conn.Close()
+    End Sub
+
+    Sub keygen(ByVal z As Integer)
+        Dim Sql As String
+        Dim key_Gen As String = ""
+        Dim x As String
+        Dim x1 As String
+        Dim n1 As Integer = 4
+        Module1.Connect()
+        Dim sqlDr As SqlDataReader
+        Dim sqlCmd As SqlCommand
+        If z = 0 Then
+            x = "C"
+            x1 = "C0001"
+            Sql = "SELECT MAX (C_ID) FROM Customer"
+        ElseIf z = 1 Then
+            x = "P"
+            x1 = "P0001"
+            Sql = "SELECT MAX (P_ID) FROM Product"
+        ElseIf z = 2 Then
+            x = "CA"
+            x1 = "CA001"
+            Sql = "SELECT MAX (Ca_ID) FROM Category"
+            n1 = 3
+        End If
+        sqlCmd = New SqlCommand(Sql, Conn)
+        sqlDr = sqlCmd.ExecuteReader
+        If sqlDr.Read() Then
+            If sqlDr.IsDBNull(0) Then
+                key_Gen = x1
+            Else
+                key_Gen = sqlDr.Item(0)
+                key_Gen = Trim(key_Gen)
+                key_Gen = Strings.Right(key_Gen, n1)
+                key_Gen = CInt(key_Gen) + 1
+                key_Gen = Strings.Right(("000" & key_Gen), n1)
+                key_Gen = x & key_Gen
+            End If
+        End If
+        sqlDr.Close()
+        txtCateCID.Text = key_Gen
+        txtPID.Text = key_Gen
+        txtMID.Text = key_Gen
+    End Sub
 
     Private Sub dgvEmp_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvEmp.CellClick
         If e.RowIndex > dgvEmp.RowCount - 2 Then
@@ -158,20 +248,20 @@ Public Class frmMain
         drag = False
     End Sub
 
-    Private Sub Panel1_MouseDown(sender As Object, e As MouseEventArgs) Handles Panel1.MouseDown
+    Private Sub Panel1_MouseDown(sender As Object, e As MouseEventArgs) Handles paMenuTap.MouseDown
         drag = True
         mousex = Cursor.Position.X - Me.Left
         mousey = Cursor.Position.Y - Me.Top
     End Sub
 
-    Private Sub Panel1_MouseMove(sender As Object, e As MouseEventArgs) Handles Panel1.MouseMove
+    Private Sub Panel1_MouseMove(sender As Object, e As MouseEventArgs) Handles paMenuTap.MouseMove
         If drag Then
             Me.Top = Cursor.Position.Y - mousey
             Me.Left = Cursor.Position.X - mousex
         End If
     End Sub
 
-    Private Sub Panel1_MouseUp(sender As Object, e As MouseEventArgs) Handles Panel1.MouseUp
+    Private Sub Panel1_MouseUp(sender As Object, e As MouseEventArgs) Handles paMenuTap.MouseUp
         drag = False
     End Sub
 
@@ -220,14 +310,6 @@ Public Class frmMain
         PicEmp.Image = Nothing
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnItem.Click
-        If paSubItem.Visible = True Then
-            paSubItem.Visible = False
-        ElseIf paSubItem.Visible = False Then
-            paSubItem.Visible = True
-        End If
-    End Sub
-
     Private Sub PictureBox8_Click(sender As Object, e As EventArgs) Handles PictureBox8.Click
         Dim opf As New OpenFileDialog
         opf.Filter = "Choose Image (*.jpg)|*.jpg"
@@ -245,11 +327,10 @@ Public Class frmMain
     End Sub
 
 
-    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+    Private Sub Button9_Click(sender As Object, e As EventArgs)
         Cateshodata()
         hide()
         paCate.Visible = True
-        paSubItem.Visible = False
         txtCateNa.Enabled = False
     End Sub
 
@@ -295,6 +376,7 @@ Public Class frmMain
 
     Private Sub btnCateSave_Click(sender As Object, e As EventArgs) Handles btnCateSave.Click
         Cate(save_sta)
+        txtCateCID.Text = Nothing
     End Sub
 
     Sub Emp(ByVal x As Integer)
@@ -349,11 +431,11 @@ Public Class frmMain
         Module1.Connect()
         Dim sql As String
         If x = 1 Then
-            sql = "insert into Cate (C_Na) values ('" & txtCateNa.Text & "')"
+            sql = "insert into Category (Ca_ID,Name) values ('" & txtCateCID.Text & "','" & txtCateNa.Text & "')"
         ElseIf x = 2 Then
-            sql = "update Cate set C_Na = '" & txtCateNa.Text & "' where C_ID = '" & dgvCate.Rows(a).Cells(0).Value & "' "
+            sql = "update Category set Name = '" & txtCateNa.Text & "' where Ca_ID = '" & dgvCate.Rows(a).Cells(0).Value & "' "
         ElseIf x = 3 Then
-            sql = "delete from Cate where C_ID = '" & dgvCate.Rows(a).Cells(0).Value & "'"
+            sql = "delete from Category where Ca_ID = '" & dgvCate.Rows(a).Cells(0).Value & "'"
         Else
             Exit Sub
         End If
@@ -374,7 +456,7 @@ Public Class frmMain
 
     Sub Cateshodata()
         Module1.Connect()
-        Dim sql As String = "select * from Cate"  'where E_User = '" & "meng0052" & "'
+        Dim sql As String = "select * from Category"  'where E_User = '" & "meng0052" & "'
         Dim da As New SqlDataAdapter(sql, Conn)
         Dim ds As New DataSet
         da.Fill(ds, "cate")
@@ -390,6 +472,7 @@ Public Class frmMain
         If e.RowIndex > dgvCate.RowCount - 2 Then
             txtCateNa.Text = ""
         ElseIf e.RowIndex > -1 Then
+            txtCateCID.Text = dgvCate.Rows(e.RowIndex).Cells(0).Value
             txtCateNa.Text = dgvCate.Rows(e.RowIndex).Cells(1).Value
         End If
     End Sub
@@ -399,11 +482,13 @@ Public Class frmMain
         If e.RowIndex > dgvCate.RowCount - 2 Then
             txtCateNa.Text = ""
         Else
+            txtCateCID.Text = dgvCate.Rows(e.RowIndex).Cells(0).Value
             txtCateNa.Text = dgvCate.Rows(e.RowIndex).Cells(1).Value
         End If
     End Sub
 
     Private Sub btnCateAdd_Click(sender As Object, e As EventArgs) Handles btnCateAdd.Click
+        keygen(2)
         save_sta = 1
         txtCateNa.Text = ""
         txtCateNa.Enabled = True
@@ -417,10 +502,11 @@ Public Class frmMain
     Private Sub btnCateDelete_Click(sender As Object, e As EventArgs) Handles btnCateDelete.Click
         Cate(3)
         txtCateNa.Text = ""
+        txtCateCID.Text = Nothing
     End Sub
 
     Private Sub btnEmpAdelete_Click(sender As Object, e As EventArgs) Handles btnEmpAdelete.Click
-        If txtCateNa.Text = "" Then
+        If txtEmpUser.Text = "" Then
             Exit Sub
         End If
         Dim Sql As String = ("delete Employee where E_User = '" & txtEmpUser.Text & "'")
@@ -447,6 +533,7 @@ Public Class frmMain
 
     Private Sub btnCateCancle_Click(sender As Object, e As EventArgs) Handles btnCateCancle.Click
         txtCateNa.Text = ""
+        txtCateCID.Text = ""
         txtCateNa.Enabled = False
     End Sub
 
@@ -464,5 +551,59 @@ Public Class frmMain
         Login.txtUser.Text = "username"
         Login.txtPass.Text = "password"
         Login.Show()
+    End Sub
+
+    Private Sub RadioButton4_CheckedChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Customershowdata()
+        paMemberview.Visible = True
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        paCate.Visible = True
+        Cateshodata()
+    End Sub
+
+    Private Sub btnMadd_Click(sender As Object, e As EventArgs) Handles btnMadd.Click
+        paMember.Visible = True
+        keygen(0)
+    End Sub
+
+    Private Sub Button18_Click(sender As Object, e As EventArgs) Handles btnCuAdd.Click
+        Customer(0)
+        paMember.Visible = False
+    End Sub
+
+    Private Sub btnPAdd_Click(sender As Object, e As EventArgs) Handles btnPAdd.Click
+        save_sta = 0
+        keygen(1)
+        Dim sql As String
+        Dim da As SqlDataAdapter
+        Dim ds As New DataSet
+        Module1.Connect()
+        sql = "SELECT Ca_ID,Name FROM Category ORDER BY Ca_ID"
+        da = New SqlDataAdapter(sql, Conn)
+        da.Fill(ds, "Category")
+        If ds.Tables("Category").Rows.Count <> 0 Then
+            cmbCate.DataSource = ds.Tables("Category")
+            cmbCate.ValueMember = "Ca_ID"
+            cmbCate.DisplayMember = "Name"
+        End If
+        Conn.Close()
+        cmbCate.SelectedIndex = -1
+        paProduct.Visible = True
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        paProductView.Visible = True
+
+    End Sub
+
+    Private Sub btnEmpAcancle_Click(sender As Object, e As EventArgs) Handles btnEmpAcancle.Click
+        PicEmp.Image = Nothing
+        txtEmpUser.Text = Nothing
     End Sub
 End Class

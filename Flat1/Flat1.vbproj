@@ -120,6 +120,12 @@
     <Compile Include="Main.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="MemberSelect.Designer.vb">
+      <DependentUpon>MemberSelect.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MemberSelect.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Module1.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -144,6 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemberSelect.resx">
+      <DependentUpon>MemberSelect.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
