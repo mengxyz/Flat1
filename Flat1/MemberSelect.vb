@@ -1,4 +1,5 @@
-﻿Public Class MemberSelect
+﻿Imports System.Data.SqlClient
+Public Class MemberSelect
     Dim drag As Boolean
     Dim mousex As Integer
     Dim mousey As Integer
@@ -21,5 +22,38 @@
 
     Private Sub Panel1_MouseUp(sender As Object, e As MouseEventArgs) Handles Panel1.MouseUp
         drag = False
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Me.Close()
+    End Sub
+
+    Private Sub MemberSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Module1.Connect()
+        Dim sql As String = "select * from Customer"
+        Dim ds As New DataSet
+        Dim da As New SqlDataAdapter(sql, Conn)
+        da.Fill(ds, "Cus")
+        dgvCustomer.ReadOnly = True
+        dgvCustomer.DataSource = ds.Tables("Cus")
+        With dgvCustomer
+            .Columns(0).HeaderText = "รหัสลูกค้า"
+            .Columns(0).Width = 100
+            .Columns(1).HeaderText = "ชื่อ"
+            .Columns(1).Width = 150
+            .Columns(2).HeaderText = "นามสกุล"
+            .Columns(2).Width = 150
+            .Columns(3).HeaderText = "เบอร็โทร"
+            .Columns(3).Width = 100
+            .Columns(4).HeaderText = "ที่อยู่"
+            .Columns(4).Width = 100
+        End With
+        Conn.Close()
+    End Sub
+
+    Private Sub dgvCustomer_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvCustomer.CellContentDoubleClick
+        Sale.txtC_ID.Text = dgvCustomer.Rows(e.RowIndex).Cells(0).Value
+        Sale.txtCNa.Text = CStr(dgvCustomer.Rows(e.RowIndex).Cells(1).Value) & " " & CStr(dgvCustomer.Rows(e.RowIndex).Cells(2).Value)
+        Me.Close()
     End Sub
 End Class

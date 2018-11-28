@@ -13,6 +13,11 @@ Public Class frmMain
         PaEmployee.Visible = False
         paEmAdmin.Visible = False
         paCate.Visible = False
+        paCustomer.Visible = False
+        paCustomerberview.Visible = False
+        paCate.Visible = False
+        paProduct.Visible = False
+        paProductView.Visible = False
     End Sub
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If User_Status = "0" Then
@@ -115,10 +120,16 @@ Public Class frmMain
         Dim sqlcmd As SqlCommand
         If x = 0 Then
             sql = "insert into Customer (C_ID,Fname,Lname,Tel,[Add]) values ('" & txtMID.Text & "','" & txtMfNa.Text & "','" & txtMlNa.Text & "','" & txtMTel.Text & "','" & txtMAdd.Text & "') "
+        Else
+            sql = "Update Customer set Fname = '" & txtMfNa.Text & "',Lname = '" & txtMlNa.Text & "',Tel = '" & txtMTel.Text & "',[Add] = '" & txtMAdd.Text & "' where C_ID = '" & txtMID.Text & "'"
         End If
         sqlcmd = New SqlCommand(sql, Conn)
         sqlcmd.ExecuteNonQuery()
-        MetroFramework.MetroMessageBox.Show(Me, "บันทึกเสร็จเรียบร้อย", "", MessageBoxButtons.OK, MessageBoxIcon.Question)
+        If x = 0 Then
+            MetroFramework.MetroMessageBox.Show(Me, "บันทึกเสร็จเรียบร้อย", "", MessageBoxButtons.OK, MessageBoxIcon.Question)
+        Else
+            MetroFramework.MetroMessageBox.Show(Me, "แก้ไขเสร็จเรียบร้อย", "", MessageBoxButtons.OK, MessageBoxIcon.Question)
+        End If
         Conn.Close()
     End Sub
 
@@ -127,12 +138,22 @@ Public Class frmMain
         Dim sql As String
         Dim sqlcmd As SqlCommand
         If x = 0 Then
-            sql = "insert into Product (P_ID,Name,Brand,Price,Amount,Ca_ID) values ('" & txtMID.Text & "','" & txtMfNa.Text & "','" & txtMlNa.Text & "','" & txtMTel.Text & "','" & txtMAdd.Text & "') "
+            sql = "insert into Product (P_ID,Name,Brand,Price,Amount,Ca_ID) values ('" & txtPID.Text & "','" & txtPName.Text & "','" & txtPBrand.Text & "','" & txtPPrice.Text & "','" & txtPAmount.Text & "','" & cmbCate.SelectedValue & "') "
+        Else
+            sql = "update Product set Name = '" & txtPName.Text & "',Brand = '" & txtPBrand.Text & "',Price = '" & txtPPrice.Text & "',Amount = '" & txtPAmount.Text & "',Ca_ID = '" & cmbCate.SelectedValue & "' where P_ID = '" & txtPID.Text & "'"
         End If
+        sqlcmd = New SqlCommand(sql, Conn)
+        sqlcmd.ExecuteNonQuery()
+        If x = 0 Then
+            MetroFramework.MetroMessageBox.Show(Me, "", "Save Complete", MessageBoxButtons.OK, MessageBoxIcon.Question)
+        ElseIf x = 2 Then
+            MetroFramework.MetroMessageBox.Show(Me, "", "Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Question)
+        End If
+        Conn.Close()
     End Sub
     Sub productshowdata()
         Module1.Connect()
-        Dim sql As String = "select p.P_ID,p.Name,p.Amount,p.Price,c.C_Na from Product p,Category c where p.C_ID = c.C_ID"
+        Dim sql As String = "select p.P_ID,p.Name,p.Amount,p.Price,c.Name from Product p,Category c where p.Ca_ID = c.Ca_ID"
         Dim ds As New DataSet
         Dim da As New SqlDataAdapter(sql, Conn)
         da.Fill(ds, "Pro")
@@ -453,7 +474,21 @@ Public Class frmMain
         End If
         Cateshodata()
     End Sub
-
+    Sub cateCmbLoad()
+        Dim sql As String
+        Dim da As SqlDataAdapter
+        Dim ds As New DataSet
+        Module1.Connect()
+        sql = "SELECT Ca_ID,Name FROM Category ORDER BY Ca_ID"
+        da = New SqlDataAdapter(sql, Conn)
+        da.Fill(ds, "Category")
+        If ds.Tables("Category").Rows.Count <> 0 Then
+            cmbCate.DataSource = ds.Tables("Category")
+            cmbCate.ValueMember = "Ca_ID"
+            cmbCate.DisplayMember = "Name"
+        End If
+        Conn.Close()
+    End Sub
     Sub Cateshodata()
         Module1.Connect()
         Dim sql As String = "select * from Category"  'where E_User = '" & "meng0052" & "'
@@ -558,46 +593,44 @@ Public Class frmMain
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        hide()
         Customershowdata()
-        paMemberview.Visible = True
+        paCustomerberview.Visible = True
+        btnMEdit.Enabled = False
+        btnMDelete.Enabled = False
+        btnMEdit.BackColor = Color.Gray
+        btnMDelete.BackColor = Color.Gray
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        hide()
         paCate.Visible = True
         Cateshodata()
     End Sub
 
     Private Sub btnMadd_Click(sender As Object, e As EventArgs) Handles btnMadd.Click
-        paMember.Visible = True
+        paCustomer.Visible = True
+        save_sta = 0
         keygen(0)
     End Sub
 
-    Private Sub Button18_Click(sender As Object, e As EventArgs) Handles btnCuAdd.Click
-        Customer(0)
-        paMember.Visible = False
+    Private Sub Button18_Click(sender As Object, e As EventArgs) Handles btnCuSave.Click
+        Customer(save_sta)
+        paCustomer.Visible = False
+        paCustomerberview.Visible = True
+        Customershowdata()
     End Sub
 
     Private Sub btnPAdd_Click(sender As Object, e As EventArgs) Handles btnPAdd.Click
         save_sta = 0
         keygen(1)
-        Dim sql As String
-        Dim da As SqlDataAdapter
-        Dim ds As New DataSet
-        Module1.Connect()
-        sql = "SELECT Ca_ID,Name FROM Category ORDER BY Ca_ID"
-        da = New SqlDataAdapter(sql, Conn)
-        da.Fill(ds, "Category")
-        If ds.Tables("Category").Rows.Count <> 0 Then
-            cmbCate.DataSource = ds.Tables("Category")
-            cmbCate.ValueMember = "Ca_ID"
-            cmbCate.DisplayMember = "Name"
-        End If
-        Conn.Close()
+        cateCmbLoad()
         cmbCate.SelectedIndex = -1
         paProduct.Visible = True
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        hide()
         paProductView.Visible = True
 
     End Sub
@@ -605,5 +638,125 @@ Public Class frmMain
     Private Sub btnEmpAcancle_Click(sender As Object, e As EventArgs) Handles btnEmpAcancle.Click
         PicEmp.Image = Nothing
         txtEmpUser.Text = Nothing
+    End Sub
+
+    Private Sub btnMEdit_Click(sender As Object, e As EventArgs) Handles btnMEdit.Click
+        Module1.Connect()
+        Dim sql As String = "select C_ID,Fname,Lname,Tel,[Add] from Customer where C_ID = '" & dgvMember.Rows(a).Cells(0).Value & "'"
+        Dim sqlDr As SqlDataReader
+        Dim sqlcmd As New SqlCommand(sql, Conn)
+        sqlDr = sqlcmd.ExecuteReader
+        If sqlDr.Read Then
+            txtMID.Text = sqlDr.Item(0).ToString
+            txtMfNa.Text = sqlDr.Item(1).ToString
+            txtMlNa.Text = sqlDr.Item(2).ToString
+            txtMTel.Text = sqlDr.Item(3).ToString
+            txtMAdd.Text = sqlDr.Item(4).ToString
+        End If
+        Conn.Close()
+        paCustomer.Show()
+        hide()
+        paCustomer.Visible = True
+        save_sta = 1
+    End Sub
+
+    Private Sub dgvMember_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvMember.CellContentClick
+        If e.RowIndex > -1 Then
+            pk = dgvMember.Rows(e.RowIndex).Cells(0).Value
+            a = e.RowIndex
+            btnMEdit.Enabled = True
+            btnMDelete.Enabled = True
+            btnMadd.Enabled = False
+            btnMadd.BackColor = Color.Gray
+            btnMEdit.BackColor = Color.FromArgb(230, 103, 103)
+            btnMDelete.BackColor = Color.FromArgb(230, 103, 103)
+        End If
+    End Sub
+
+    Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
+        paCustomer.Visible = False
+    End Sub
+
+    Private Sub btnCuCancle_Click(sender As Object, e As EventArgs) Handles btnCuCancle.Click
+        paCustomer.Visible = False
+        paCustomerberview.Visible = True
+        btnMEdit.BackColor = Color.Gray
+        btnMDelete.BackColor = Color.Gray
+        btnMadd.Enabled = True
+        btnMEdit.Enabled = False
+        btnMDelete.Enabled = False
+        btnMadd.BackColor = Color.FromArgb(230, 103, 103)
+        Customershowdata()
+    End Sub
+
+    Private Sub btnItem_Click(sender As Object, e As EventArgs) Handles btnItem.Click
+        hide()
+        btnPAdd.Enabled = True
+        btnPAdd.BackColor = Color.FromArgb(230, 103, 103)
+        paProductView.Visible = True
+        btnPEdit.Enabled = False
+        btnPDelete.Enabled = False
+        btnPEdit.BackColor = Color.Gray
+        btnPDelete.BackColor = Color.Gray
+        productshowdata()
+    End Sub
+
+    Private Sub btnPSave_Click(sender As Object, e As EventArgs) Handles btnPSave.Click
+        Product(save_sta)
+        paProduct.Visible = False
+        paProductView.Visible = True
+        productshowdata()
+    End Sub
+
+    Private Sub btnMCancle_Click(sender As Object, e As EventArgs) Handles btnMCancle.Click
+        btnMEdit.BackColor = Color.Gray
+        btnMDelete.BackColor = Color.Gray
+        btnMadd.Enabled = True
+        btnMEdit.Enabled = False
+        btnMDelete.Enabled = False
+        btnMadd.BackColor = Color.FromArgb(230, 103, 103)
+    End Sub
+
+    Private Sub btnPCancle_Click(sender As Object, e As EventArgs) Handles btnPCancle.Click
+        btnPEdit.BackColor = Color.Gray
+        btnPDelete.BackColor = Color.Gray
+        btnPAdd.Enabled = True
+        btnPEdit.Enabled = False
+        btnPDelete.Enabled = False
+        btnPAdd.BackColor = Color.FromArgb(230, 103, 103)
+    End Sub
+
+    Private Sub dgvProduct_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProduct.CellContentClick
+        If e.RowIndex > -1 Then
+            pk = dgvProduct.Rows(e.RowIndex).Cells(0).Value
+            a = e.RowIndex
+            btnPEdit.Enabled = True
+            btnPDelete.Enabled = True
+            btnPAdd.Enabled = False
+            btnPAdd.BackColor = Color.Gray
+            btnPEdit.BackColor = Color.FromArgb(230, 103, 103)
+            btnPDelete.BackColor = Color.FromArgb(230, 103, 103)
+        End If
+    End Sub
+
+    Private Sub btnPEdit_Click(sender As Object, e As EventArgs) Handles btnPEdit.Click
+        cateCmbLoad()
+        Module1.Connect()
+        Dim sql As String = "select p.P_ID,p.Name,p.Brand,p.Price,p.Amount,c.Ca_ID from Product p,Category c where p.P_ID = '" & dgvProduct.Rows(a).Cells(0).Value & "' and p.Ca_ID = c.Ca_ID"
+        Dim sqlDr As SqlDataReader
+        Dim sqlcmd As New SqlCommand(sql, Conn)
+        sqlDr = sqlcmd.ExecuteReader
+        If sqlDr.Read Then
+            txtPID.Text = sqlDr.Item(0).ToString
+            txtPName.Text = sqlDr.Item(1).ToString
+            txtPBrand.Text = sqlDr.Item(2).ToString
+            txtPPrice.Text = sqlDr.Item(3).ToString
+            txtPAmount.Text = sqlDr.Item(4).ToString
+            cmbCate.SelectedValue = sqlDr.Item(5)
+        End If
+        Conn.Close()
+        hide()
+        paProduct.Visible = True
+        save_sta = 2
     End Sub
 End Class
