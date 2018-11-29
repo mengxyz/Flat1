@@ -48,6 +48,7 @@ Public Class Sale
         showdata()
         UserLoad()
         clear()
+        dgvProduct.Enabled = False
     End Sub
     Sub showdata()
         Module1.Connect()
@@ -183,11 +184,19 @@ Public Class Sale
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        
+        btnAdd.Enabled = False
+        btnAdd.BackColor = Color.FromArgb(170, 166, 157)
+        dgvProduct .Enabled = True 
     End Sub
 
     Private Sub btnCancle_Click(sender As Object, e As EventArgs) Handles btnCancle.Click
         clear()
+        btnAdd.Enabled = True
+        btnAdd.BackColor = Color.FromArgb(52, 172, 224)
+        sum = 0
+        lblSum.Text = "0.00"
+        dgvProduct.Enabled = False
+        showdata()
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -199,5 +208,11 @@ Public Class Sale
     Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
         clear()
         dgvOrder.Rows.Clear()
+        btnAdd.Enabled = True
+        btnAdd.BackColor = Color.FromArgb(52, 172, 224)
+        dgvProduct.Enabled = False
+        sum = 0
+        lblSum.Text = "0.00"
+        showdata()
     End Sub
 End Class

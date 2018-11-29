@@ -23,6 +23,7 @@ Partial Class Sale
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.dgvProduct = New System.Windows.Forms.DataGridView()
         Me.dgvOrder = New System.Windows.Forms.DataGridView()
@@ -62,6 +63,7 @@ Partial Class Sale
         Me.txtAmount = New System.Windows.Forms.TextBox()
         Me.txtPrice = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvProduct, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dgvOrder, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -70,12 +72,23 @@ Partial Class Sale
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(34, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(147, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.PictureBox2)
         Me.Panel1.Controls.Add(Me.PictureBox1)
         Me.Panel1.Cursor = System.Windows.Forms.Cursors.Arrow
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1056, 39)
         Me.Panel1.TabIndex = 0
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = Global.Flat1.My.Resources.Resources.icons8_shopping_cart_48
+        Me.PictureBox2.Location = New System.Drawing.Point(3, 2)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(35, 35)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox2.TabIndex = 2
+        Me.PictureBox2.TabStop = False
         '
         'PictureBox1
         '
@@ -214,7 +227,7 @@ Partial Class Sale
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("FC Active", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(731, 570)
+        Me.Label1.Location = New System.Drawing.Point(687, 570)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(83, 26)
         Me.Label1.TabIndex = 9
@@ -224,7 +237,7 @@ Partial Class Sale
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("FC Active", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(958, 567)
+        Me.Label2.Location = New System.Drawing.Point(997, 567)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(46, 26)
         Me.Label2.TabIndex = 10
@@ -234,7 +247,7 @@ Partial Class Sale
         '
         Me.lblSum.AutoSize = True
         Me.lblSum.Font = New System.Drawing.Font("FC Active", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSum.Location = New System.Drawing.Point(855, 570)
+        Me.lblSum.Location = New System.Drawing.Point(812, 570)
         Me.lblSum.Name = "lblSum"
         Me.lblSum.Size = New System.Drawing.Size(59, 26)
         Me.lblSum.TabIndex = 11
@@ -520,6 +533,7 @@ Partial Class Sale
         Me.Name = "Sale"
         Me.Text = "Sale"
         Me.Panel1.ResumeLayout(False)
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvProduct, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.dgvOrder, System.ComponentModel.ISupportInitialize).EndInit()
@@ -566,4 +580,5 @@ Partial Class Sale
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents txtAmount As System.Windows.Forms.TextBox
     Friend WithEvents txtPrice As System.Windows.Forms.TextBox
+    Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
 End Class

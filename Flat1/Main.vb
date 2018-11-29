@@ -9,9 +9,66 @@ Public Class frmMain
     Dim save_sta As Integer
     Dim pscha As Integer
     Dim picdata() As Byte
+    Sub eng(e As KeyPressEventArgs)
+        Select Case Asc(e.KeyChar)
+            Case 48 To 122
+                e.Handled = False
+            Case 8, 13, 45
+                e.Handled = False
+            Case Else
+                e.Handled = True
+        End Select
+    End Sub
+    Sub num_Tel(e As KeyPressEventArgs)
+        Select Case Asc(e.KeyChar)
+            Case 48 To 57
+                e.Handled = False
+            Case 8, 13, 45
+                e.Handled = False
+            Case Else
+                e.Handled = True
+        End Select
+    End Sub
+    Sub num_only(e As KeyPressEventArgs)
+        Select Case Asc(e.KeyChar)
+            Case 48 To 57
+                e.Handled = False
+            Case 8, 13
+                e.Handled = False
+            Case Else
+                e.Handled = True
+        End Select
+    End Sub
+    Sub Th_eng(e As KeyPressEventArgs)
+        Select Case Asc(e.KeyChar)
+            Case 58 To 122
+                e.Handled = False
+            Case 8, 13, 32
+                e.Handled = False
+            Case 161 To 240
+                e.Handled = False
+            Case Else
+                e.Handled = True
+        End Select
+    End Sub
+    Sub Th_eng_num(e As KeyPressEventArgs)
+        Select Case Asc(e.KeyChar)
+            Case 48 To 57
+                e.Handled = False
+            Case 58 To 122
+                e.Handled = False
+            Case 8, 13, 32
+                e.Handled = False
+            Case 161 To 240
+                e.Handled = False
+            Case Else
+                e.Handled = True
+        End Select
+    End Sub
+
     Sub hide()
         PaEmployee.Visible = False
-        paEmAdmin.Visible = False
+        paUserAdmin.Visible = False
         paCate.Visible = False
         paCustomer.Visible = False
         paCustomerberview.Visible = False
@@ -46,19 +103,23 @@ Public Class frmMain
         End If
     End Sub
 
-    Sub empPic(ByVal a As String)
+    Sub UserPic(ByVal a As String)
         Dim sql As String
         Dim da As SqlDataAdapter
         If a = "1" Then
-            sql = "SELECT E_Pic from Employee where E_User = '" & txtEmpUser.Text & "'"
+            sql = "SELECT Pic from [User] where Username = '" & txtEmpUser.Text & "'"
         Else
-            sql = "SELECT E_Pic from Employee where E_User = '" & User_Na & "'"
+            sql = "SELECT Pic from [User] where Username = '" & User_Na & "'"
         End If
         Module1.Connect()
         Dim tb As New DataTable
         da = New SqlDataAdapter(sql, Conn)
         da.Fill(tb)
         Dim img() As Byte
+        If tb.Rows(0)(0) Is DBNull.Value And a <> "2" Then
+            PicEmp.Image = Nothing
+            Exit Sub
+        End If
         img = tb.Rows(0)(0)
         picdata = img
         Dim ms As New MemoryStream(img)
@@ -69,13 +130,13 @@ Public Class frmMain
         End If
         ms.Close()
     End Sub
-    Sub empshodata()
+    Sub Usershodata()
         Module1.Connect()
         Dim sql As String
         If User_Status = 0 Then
-            sql = "select E_User,E_Fname,E_Lname,E_Tel,E_Sex,E_Status from Employee"  'where E_User = '" & "meng0052" & "'
+            sql = "select Username,Fname,Lname,Tel,STR(Sex) as Sex ,STR(Status) as Status from [User]"  'where E_User = '" & "meng0052" & "'
         Else
-            sql = "select E_User,E_Pass,E_Fname,E_Lname,E_Tel,E_Sex,E_Status,E_Add from Employee where E_User = '" & User_Na & "'"
+            sql = "select Username,Pass,Fname,Lname,Tel,STR(Sex) as Sex ,STR(Status) as Status,[Add] from [User] where Username = '" & User_Na & "'"
             Dim sqlcmd As New SqlCommand(sql, Conn)
             Dim dr As SqlDataReader
             dr = sqlcmd.ExecuteReader
@@ -96,22 +157,39 @@ Public Class frmMain
             Else
                 rdbUser.Checked = True
             End If
-            empPic("2")
+            UserPic("2")
             Conn.Close()
             Exit Sub
         End If
         Dim da As New SqlDataAdapter(sql, Conn)
         Dim ds As New DataSet
         da.Fill(ds, "Emp")
-        dgvEmp.ReadOnly = True
-        dgvEmp.DataSource = ds.Tables("Emp")
-        With dgvEmp
+        dgvUser.ReadOnly = True
+        For i As Integer = 0 To ds.Tables("emp").Rows.Count - 1
+            If ds.Tables("emp").Rows(i).Item(4) = 0 Then
+                ds.Tables("emp").Rows(i).Item(4) = CStr("ชาย")
+            Else
+                ds.Tables("emp").Rows(i).Item(4) = "หญิง"
+            End If
+            If ds.Tables("emp").Rows(i).Item(5) = 0 Then
+                ds.Tables("emp").Rows(i).Item(5) = "ผู้ดูแลระบบ"
+            Else
+                ds.Tables("emp").Rows(i).Item(5) = "พนักงาน"
+            End If
+        Next
+        dgvUser.DataSource = ds.Tables("Emp")
+        With dgvUser
             .Columns(0).Visible = False
             .Columns(1).HeaderText = "ชื่อ"
+            .Columns(1).Width = 125
             .Columns(2).HeaderText = "นามสกุล"
+            .Columns(2).Width = 125
             .Columns(3).HeaderText = "เบอร็โทร"
+            .Columns(3).Width = 120
             .Columns(4).HeaderText = "เพศ"
+            .Columns(4).Width = 100
             .Columns(5).HeaderText = "ระดับ"
+            .Columns(5).Width = 100
         End With
     End Sub
     Sub Customer(ByVal x As Integer)
@@ -153,12 +231,23 @@ Public Class frmMain
     End Sub
     Sub productshowdata()
         Module1.Connect()
-        Dim sql As String = "select p.P_ID,p.Name,p.Amount,p.Price,c.Name from Product p,Category c where p.Ca_ID = c.Ca_ID"
+        Dim sql As String = "select p.P_ID,p.Name,p.Brand,p.Amount,p.Price,c.Name from Product p,Category c where p.Ca_ID = c.Ca_ID"
         Dim ds As New DataSet
         Dim da As New SqlDataAdapter(sql, Conn)
         da.Fill(ds, "Pro")
         dgvProduct.ReadOnly = True
         dgvProduct.DataSource = ds.Tables("Pro")
+        With dgvProduct
+            .Columns(0).HeaderText = "รหัสสินค้า"
+            .Columns(0).Width = 100
+            .Columns(1).HeaderText = "ชื่อสินค้า"
+            .Columns(1).Width = 150
+            .Columns(2).HeaderText = "ยี่ห้อ"
+            .Columns(4).HeaderText = "ราคา"
+            .Columns(3).HeaderText = "จำนวนคงเหลือ"
+            .Columns(3).Width = 70
+            .Columns(5).HeaderText = "ประเภท"
+        End With
     End Sub
     Sub Customershowdata()
         Module1.Connect()
@@ -222,28 +311,34 @@ Public Class frmMain
         txtMID.Text = key_Gen
     End Sub
 
-    Private Sub dgvEmp_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvEmp.CellClick
-        If e.RowIndex > dgvEmp.RowCount - 2 Then
+    Private Sub dgvEmp_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvUser.CellClick
+        If e.RowIndex > dgvUser.RowCount - 2 Then
             txtEmpUser.Text = ""
             PicEmp.Image = Nothing
         ElseIf e.RowIndex > -1 Then
-            pk = dgvEmp.Rows(e.RowIndex).Cells(0).Value
-            txtEmpUser.Text = dgvEmp.Rows(e.RowIndex).Cells(0).Value
+            pk = dgvUser.Rows(e.RowIndex).Cells(0).Value
+            txtEmpUser.Text = dgvUser.Rows(e.RowIndex).Cells(0).Value
             a = e.RowIndex
-            empPic("1")
+            UserPic("1")
+            btnUserAadd.Enabled = False
+            btnUserAadd.BackColor = Color.FromArgb(170, 166, 157)
+            btnUserAedit.Enabled = True
+            btnUserAdelete.Enabled = True
+            btnUserAedit.BackColor = Color.FromArgb(52, 172, 224)
+            btnUserAdelete.BackColor = Color.FromArgb(52, 172, 224)
         End If
     End Sub
 
-    Private Sub dgvEmp_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvEmp.CellContentDoubleClick
-        txtNa.Text = dgvEmp.Rows(e.RowIndex).Cells(1).Value
-        txtLname.Text = dgvEmp.Rows(e.RowIndex).Cells(2).Value
-        txtPhone.Text = dgvEmp.Rows(e.RowIndex).Cells(3).Value
-        If dgvEmp.Rows(e.RowIndex).Cells(4).Value = 0 Then
+    Private Sub dgvEmp_CellContentDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvUser.CellContentDoubleClick
+        txtNa.Text = dgvUser.Rows(e.RowIndex).Cells(1).Value
+        txtLname.Text = dgvUser.Rows(e.RowIndex).Cells(2).Value
+        txtPhone.Text = dgvUser.Rows(e.RowIndex).Cells(3).Value
+        If dgvUser.Rows(e.RowIndex).Cells(4).Value = 0 Then
             rdbMen.Checked = True
         Else
             rdbWomen.Checked = True
         End If
-        If dgvEmp.Rows(e.RowIndex).Cells(5).Value = 0 Then
+        If dgvUser.Rows(e.RowIndex).Cells(5).Value = 0 Then
             rdbAdmin.Checked = True
         Else
             rdbUser.Checked = True
@@ -320,14 +415,20 @@ Public Class frmMain
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If User_Status = "0" Then
             hide()
-            paEmAdmin.Visible = True
-            empshodata()
+            paUserAdmin.Visible = True
+            Usershodata()
+            btnUserAadd.Enabled = True
+            btnUserAadd.BackColor = Color.FromArgb(52, 172, 224)
+            btnUserAedit.Enabled = False
+            btnUserAdelete.Enabled = False
+            btnUserAedit.BackColor = Color.FromArgb(170, 166, 157)
+            btnUserAdelete.BackColor = Color.FromArgb(170, 166, 157)
         Else
             hide()
             PaEmployee.Visible = True
-            empshodata()
+            Usershodata()
         End If
-        txtEmpUser.Text = ""
+        txtEmpUser.Text = "Username"
         PicEmp.Image = Nothing
     End Sub
 
@@ -343,7 +444,7 @@ Public Class frmMain
     End Sub
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        Emp(save_sta)
+        User(save_sta)
         clear(1)
     End Sub
 
@@ -356,9 +457,9 @@ Public Class frmMain
     End Sub
 
 
-    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles btnEmpAedit.Click
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles btnUserAedit.Click
         Module1.Connect()
-        Dim sql As String = "select E_Pass,E_Add from Employee where E_User = '" & dgvEmp.Rows(a).Cells(0).Value & "'"
+        Dim sql As String = "select Pass,[Add] from [User] where Username = '" & dgvUser.Rows(a).Cells(0).Value & "'"
         Dim sqlDr As SqlDataReader
         Dim sqlcmd As New SqlCommand(sql, Conn)
         sqlDr = sqlcmd.ExecuteReader
@@ -371,23 +472,28 @@ Public Class frmMain
             ' MetroFramework.MetroMessageBox.Show(Me, "", "เลือกข้อมูลที่ต้องการเเก้ไข", MessageBoxButtons.OKCancel, MessageBoxIcon.Error)
             Exit Sub
         End If
-        txtUser.Text = dgvEmp.Rows(a).Cells(0).Value
-        txtNa.Text = dgvEmp.Rows(a).Cells(1).Value
-        txtLname.Text = dgvEmp.Rows(a).Cells(2).Value
-        txtPhone.Text = dgvEmp.Rows(a).Cells(3).Value
-        If dgvEmp.Rows(a).Cells(4).Value = 0 Then
+        txtUser.Text = dgvUser.Rows(a).Cells(0).Value
+        txtNa.Text = dgvUser.Rows(a).Cells(1).Value
+        txtLname.Text = dgvUser.Rows(a).Cells(2).Value
+        txtPhone.Text = dgvUser.Rows(a).Cells(3).Value
+        If dgvUser.Rows(a).Cells(4).Value = "ชาย" Then
             rdbMen.Checked = True
         Else
             rdbWomen.Checked = True
         End If
-        If dgvEmp.Rows(a).Cells(5).Value = 0 Then
+        If dgvUser.Rows(a).Cells(5).Value = "ผู้ดูแลระบบ" Then
             rdbAdmin.Checked = True
         Else
             rdbUser.Checked = True
         End If
         hide()
         PaEmployee.Visible = True
-        empPic("2")
+        If PicEmp.Image Is Nothing Then
+            PicUser.Image = Nothing
+            patchpic = Nothing
+        Else
+            UserPic("2")
+        End If
         save_sta = 2
     End Sub
 
@@ -400,7 +506,7 @@ Public Class frmMain
         txtCateCID.Text = Nothing
     End Sub
 
-    Sub Emp(ByVal x As Integer)
+    Sub User(ByVal x As Integer)
         Dim sql As String
         Dim sex, status As Integer
         Dim sqlCmd As SqlCommand
@@ -425,12 +531,14 @@ Public Class frmMain
         End If
         MessageBox.Show(x)
         If x <> 2 Then
-            sql = "insert into Employee (E_User,E_Pass,E_Fname,E_Lname,E_Add,E_Tel,E_Sex,E_Status,E_Pic) values ('" & txtUser.Text & "','" & txtPass.Text & "','" & txtNa.Text & "','" & txtLname.Text & "','" & txtAddress.Text & "','" & txtPhone.Text & "','" & sex & "','" & status & "',@pic)"
+            If patchpic = Nothing Then
+                sql = "insert into [User] (Username,Pass,Fname,Lname,[Add],Tel,Sex,Status) values ('" & txtUser.Text & "','" & txtPass.Text & "','" & txtNa.Text & "','" & txtLname.Text & "','" & txtAddress.Text & "','" & txtPhone.Text & "','" & sex & "','" & status & "')"
+            Else
+                sql = "insert into [User] (Username,Pass,Fname,Lname,[Add],Tel,Sex,Status,Pic) values ('" & txtUser.Text & "','" & txtPass.Text & "','" & txtNa.Text & "','" & txtLname.Text & "','" & txtAddress.Text & "','" & txtPhone.Text & "','" & sex & "','" & status & "',@pic)"
+            End If
         ElseIf x = 2 Then
             If patchpic = Nothing Then
-                MessageBox.Show("00000000")
-                MessageBox.Show(pk)
-                sql = "update Employee set E_User = '" & txtUser.Text & "',E_Pass = '" & txtPass.Text & "',E_Fname = '" & txtNa.Text & "',E_Lname = '" & txtLname.Text & "',E_Add = '" & txtAddress.Text & "',E_Tel = '" & txtPhone.Text & "',E_Sex = '" & sex & "',E_Status = '" & status & "',E_Pic = @pic where E_User = '" & pk & "'"
+                sql = "update [User] set Username = '" & txtUser.Text & "',Pass = '" & txtPass.Text & "',Fname = '" & txtNa.Text & "',Lname = '" & txtLname.Text & "',[Add] = '" & txtAddress.Text & "',Tel = '" & txtPhone.Text & "',Sex = '" & sex & "',Status = '" & status & "' where Username = '" & pk & "'"
                 sqlCmd = New SqlCommand(sql, Conn)
                 sqlCmd.Parameters.Add(New SqlParameter("@pic", picdata))
                 sqlCmd.ExecuteNonQuery()
@@ -438,11 +546,13 @@ Public Class frmMain
                 Conn.Close()
                 Exit Sub
             Else
-                sql = "update Employee set E_User = '" & txtUser.Text & "',E_Pass = '" & txtPass.Text & "',E_Fname = '" & txtNa.Text & "',E_Lname = '" & txtLname.Text & "',E_Add = '" & txtAddress.Text & "',E_Tel = '" & txtPhone.Text & "',E_Sex = '" & sex & "',E_Status = '" & status & "',E_Pic = @pic where E_User = '" & pk & "'"
+                sql = "update [User] set Username = '" & txtUser.Text & "',Pass = '" & txtPass.Text & "',Fname = '" & txtNa.Text & "',Lname = '" & txtLname.Text & "',[Add] = '" & txtAddress.Text & "',Tel = '" & txtPhone.Text & "',Sex = '" & sex & "',Status = '" & status & "' ,Pic = @picwhere Username = '" & pk & "'"
             End If
         End If
         sqlCmd = New SqlCommand(sql, Conn)
-        sqlCmd.Parameters.Add(New SqlParameter("@pic", img))
+        If patchpic <> Nothing Then
+            sqlCmd.Parameters.Add(New SqlParameter("@pic", img))
+        End If
         sqlCmd.ExecuteNonQuery()
         MessageBox.Show("Save Complete")
         Conn.Close()
@@ -498,9 +608,9 @@ Public Class frmMain
         dgvCate.ReadOnly = True
         dgvCate.DataSource = ds.Tables("cate")
         dgvCate.Columns(0).HeaderText = "รหัสหมวดหมู่"
-        dgvCate.Columns(0).Width = 100
+        dgvCate.Columns(0).Width = 120
         dgvCate.Columns(1).HeaderText = "ชื่อหมวดหมู่"
-        dgvCate.Columns(1).Width = 200
+        dgvCate.Columns(1).Width = 250
     End Sub
 
     Private Sub dgvCate_CellContentClick_1(sender As Object, e As DataGridViewCellEventArgs) Handles dgvCate.CellContentClick
@@ -509,6 +619,12 @@ Public Class frmMain
         ElseIf e.RowIndex > -1 Then
             txtCateCID.Text = dgvCate.Rows(e.RowIndex).Cells(0).Value
             txtCateNa.Text = dgvCate.Rows(e.RowIndex).Cells(1).Value
+            btnCateAdd.Enabled = False
+            btnCateEdit.Enabled = True
+            btnCateDelete.Enabled = True
+            btnCateAdd.BackColor = Color.FromArgb(170, 166, 157)
+            btnCateDelete.BackColor = Color.FromArgb(52, 172, 224)
+            btnCateEdit.BackColor = Color.FromArgb(52, 172, 224)
         End If
     End Sub
 
@@ -540,16 +656,18 @@ Public Class frmMain
         txtCateCID.Text = Nothing
     End Sub
 
-    Private Sub btnEmpAdelete_Click(sender As Object, e As EventArgs) Handles btnEmpAdelete.Click
+    Private Sub btnEmpAdelete_Click(sender As Object, e As EventArgs) Handles btnUserAdelete.Click
         If txtEmpUser.Text = "" Then
             Exit Sub
         End If
-        Dim Sql As String = ("delete Employee where E_User = '" & txtEmpUser.Text & "'")
+        Dim Sql As String = ("delete [User] where Username = '" & txtEmpUser.Text & "'")
         Dim sqlCmd As New SqlCommand(Sql, Conn)
         sqlCmd.ExecuteNonQuery()
         Conn.Close()
         MetroFramework.MetroMessageBox.Show(Me, "", "Delete Complete", MessageBoxButtons.OK, MessageBoxIcon.Question)
-        empshodata()
+        Usershodata()
+        PicEmp.Image = Nothing
+        txtEmpUser.Text = "Username"
     End Sub
 
     Private Sub Button8_Click_1(sender As Object, e As EventArgs) Handles Button8.Click
@@ -560,8 +678,23 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub btnEmpAadd_Click(sender As Object, e As EventArgs) Handles btnEmpAadd.Click
+    Sub clear()
+        txtNa.Text = Nothing
+        txtLname.Text = Nothing
+        txtPhone.Text = Nothing
+        txtAddress.Text = Nothing
+        rdbMen.Checked = False
+        rdbWomen.Checked = False
+        rdbAdmin.Checked = False
+        rdbUser.Checked = False
+        txtUser.Text = "Username"
+        txtPass.Text = "Password"
+        PicUser.Image = Nothing
+    End Sub
+
+    Private Sub btnEmpAadd_Click(sender As Object, e As EventArgs) Handles btnUserAadd.Click
         hide()
+        clear()
         PaEmployee.Visible = True
         save_sta = 1
     End Sub
@@ -569,6 +702,14 @@ Public Class frmMain
     Private Sub btnCateCancle_Click(sender As Object, e As EventArgs) Handles btnCateCancle.Click
         txtCateNa.Text = ""
         txtCateCID.Text = ""
+        btnCateAdd.Enabled = True
+        btnCateAdd.BackColor = Color.FromArgb(52, 172, 224)
+        btnCateEdit.Enabled = False
+        btnCateDelete.Enabled = False
+        btnCateSave.Enabled = False
+        btnCateSave.BackColor = Color.FromArgb(170, 166, 157)
+        btnCateDelete.BackColor = Color.FromArgb(170, 166, 157)
+        btnCateEdit.BackColor = Color.FromArgb(170, 166, 157)
         txtCateNa.Enabled = False
     End Sub
 
@@ -577,10 +718,18 @@ Public Class frmMain
     End Sub
 
     Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
-        paEmAdmin.Visible = False
+        PicEmp.Image = Nothing
+        txtEmpUser.Text = Nothing
+        btnUserAadd.Enabled = True
+        btnUserAadd.BackColor = Color.FromArgb(52, 172, 224)
+        btnUserAedit.Enabled = False
+        btnUserAdelete.Enabled = False
+        btnUserAedit.BackColor = Color.FromArgb(170, 166, 157)
+        btnUserAdelete.BackColor = Color.FromArgb(170, 166, 157)
+        paUserAdmin.Visible = False
     End Sub
 
-    Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click
+    Private Sub Button14_Click(sender As Object, e As EventArgs)
         Me.Close()
         Login.txtPass.PasswordChar = ""
         Login.txtUser.Text = "username"
@@ -598,12 +747,20 @@ Public Class frmMain
         paCustomerberview.Visible = True
         btnMEdit.Enabled = False
         btnMDelete.Enabled = False
-        btnMEdit.BackColor = Color.Gray
-        btnMDelete.BackColor = Color.Gray
+        btnMEdit.BackColor = Color.FromArgb(170, 166, 157)
+        btnMDelete.BackColor = Color.FromArgb(170, 166, 157)
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         hide()
+        btnCateAdd.Enabled = True
+        btnCateAdd.BackColor = Color.FromArgb(52, 172, 224)
+        btnCateEdit.Enabled = False
+        btnCateDelete.Enabled = False
+        btnCateSave.Enabled = False
+        btnCateSave.BackColor = Color.FromArgb(170, 166, 157)
+        btnCateDelete.BackColor = Color.FromArgb(170, 166, 157)
+        btnCateEdit.BackColor = Color.FromArgb(170, 166, 157)
         paCate.Visible = True
         Cateshodata()
     End Sub
@@ -629,15 +786,21 @@ Public Class frmMain
         paProduct.Visible = True
     End Sub
 
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+    Private Sub Button6_Click(sender As Object, e As EventArgs)
         hide()
         paProductView.Visible = True
 
     End Sub
 
-    Private Sub btnEmpAcancle_Click(sender As Object, e As EventArgs) Handles btnEmpAcancle.Click
+    Private Sub btnEmpAcancle_Click(sender As Object, e As EventArgs) Handles btnUserAcancle.Click
         PicEmp.Image = Nothing
         txtEmpUser.Text = Nothing
+        btnUserAadd.Enabled = True
+        btnUserAadd.BackColor = Color.FromArgb(52, 172, 224)
+        btnUserAedit.Enabled = False
+        btnUserAdelete.Enabled = False
+        btnUserAedit.BackColor = Color.FromArgb(170, 166, 157)
+        btnUserAdelete.BackColor = Color.FromArgb(170, 166, 157)
     End Sub
 
     Private Sub btnMEdit_Click(sender As Object, e As EventArgs) Handles btnMEdit.Click
@@ -667,9 +830,9 @@ Public Class frmMain
             btnMEdit.Enabled = True
             btnMDelete.Enabled = True
             btnMadd.Enabled = False
-            btnMadd.BackColor = Color.Gray
-            btnMEdit.BackColor = Color.FromArgb(230, 103, 103)
-            btnMDelete.BackColor = Color.FromArgb(230, 103, 103)
+            btnMadd.BackColor = Color.FromArgb(170, 166, 157)
+            btnMEdit.BackColor = Color.FromArgb(170, 166, 157)
+            btnMDelete.BackColor = Color.FromArgb(170, 166, 157)
         End If
     End Sub
 
@@ -680,24 +843,24 @@ Public Class frmMain
     Private Sub btnCuCancle_Click(sender As Object, e As EventArgs) Handles btnCuCancle.Click
         paCustomer.Visible = False
         paCustomerberview.Visible = True
-        btnMEdit.BackColor = Color.Gray
-        btnMDelete.BackColor = Color.Gray
+        btnMEdit.BackColor = Color.FromArgb(170, 166, 157)
+        btnMDelete.BackColor = Color.FromArgb(170, 166, 157)
         btnMadd.Enabled = True
         btnMEdit.Enabled = False
         btnMDelete.Enabled = False
-        btnMadd.BackColor = Color.FromArgb(230, 103, 103)
+        btnMadd.BackColor = Color.FromArgb(52, 172, 224)
         Customershowdata()
     End Sub
 
     Private Sub btnItem_Click(sender As Object, e As EventArgs) Handles btnItem.Click
         hide()
         btnPAdd.Enabled = True
-        btnPAdd.BackColor = Color.FromArgb(230, 103, 103)
+        btnPAdd.BackColor = Color.FromArgb(52, 172, 224)
         paProductView.Visible = True
         btnPEdit.Enabled = False
         btnPDelete.Enabled = False
-        btnPEdit.BackColor = Color.Gray
-        btnPDelete.BackColor = Color.Gray
+        btnPEdit.BackColor = Color.FromArgb(170, 166, 157)
+        btnPDelete.BackColor = Color.FromArgb(170, 166, 157)
         productshowdata()
     End Sub
 
@@ -709,21 +872,21 @@ Public Class frmMain
     End Sub
 
     Private Sub btnMCancle_Click(sender As Object, e As EventArgs) Handles btnMCancle.Click
-        btnMEdit.BackColor = Color.Gray
-        btnMDelete.BackColor = Color.Gray
+        btnMEdit.BackColor = Color.FromArgb(170, 166, 157)
+        btnMDelete.BackColor = Color.FromArgb(170, 166, 157)
         btnMadd.Enabled = True
         btnMEdit.Enabled = False
         btnMDelete.Enabled = False
-        btnMadd.BackColor = Color.FromArgb(230, 103, 103)
+        btnMadd.BackColor = Color.FromArgb(52, 172, 2243)
     End Sub
 
     Private Sub btnPCancle_Click(sender As Object, e As EventArgs) Handles btnPCancle.Click
-        btnPEdit.BackColor = Color.Gray
-        btnPDelete.BackColor = Color.Gray
+        btnPEdit.BackColor = Color.FromArgb(170, 166, 157)
+        btnPDelete.BackColor = Color.FromArgb(170, 166, 157)
         btnPAdd.Enabled = True
         btnPEdit.Enabled = False
         btnPDelete.Enabled = False
-        btnPAdd.BackColor = Color.FromArgb(230, 103, 103)
+        btnPAdd.BackColor = Color.FromArgb(52, 172, 224)
     End Sub
 
     Private Sub dgvProduct_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProduct.CellContentClick
@@ -733,9 +896,9 @@ Public Class frmMain
             btnPEdit.Enabled = True
             btnPDelete.Enabled = True
             btnPAdd.Enabled = False
-            btnPAdd.BackColor = Color.Gray
-            btnPEdit.BackColor = Color.FromArgb(230, 103, 103)
-            btnPDelete.BackColor = Color.FromArgb(230, 103, 103)
+            btnPAdd.BackColor = Color.FromArgb(170, 166, 157)
+            btnPEdit.BackColor = Color.FromArgb(52, 172, 224)
+            btnPDelete.BackColor = Color.FromArgb(52, 172, 224)
         End If
     End Sub
 
@@ -758,5 +921,68 @@ Public Class frmMain
         hide()
         paProduct.Visible = True
         save_sta = 2
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Sale.Show()
+    End Sub
+
+    Private Sub txtCateNa_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtCateNa.KeyPress
+        Th_eng_num(e)
+    End Sub
+
+    Private Sub txtMfNa_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtMfNa.KeyPress
+        Th_eng(e)
+    End Sub
+
+    Private Sub txtMlNa_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtMlNa.KeyPress
+        Th_eng(e)
+    End Sub
+
+    Private Sub txtMTel_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtMTel.KeyPress
+        num_Tel(e)
+    End Sub
+
+    Private Sub txtNa_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtNa.KeyPress
+        Th_eng(e)
+    End Sub
+
+    Private Sub txtLname_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtLname.KeyPress
+        Th_eng(e)
+    End Sub
+
+    Private Sub txtUser_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtUser.KeyPress
+        Select Case Asc(e.KeyChar)
+            Case 48 To 57
+                e.Handled = False
+            Case 65 To 90
+                e.Handled = False
+            Case 97 To 122
+                e.Handled = False
+            Case 8, 46
+                e.Handled = False
+            Case Else
+                e.Handled = True
+        End Select
+    End Sub
+
+    Private Sub txtPhone_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPhone.KeyPress
+        num_Tel(e)
+    End Sub
+
+    Private Sub txtPName_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPName.KeyPress
+        Th_eng_num(e)
+    End Sub
+
+    Private Sub txtPBrand_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPBrand.KeyPress
+        Th_eng_num(e)
+    End Sub
+
+    Private Sub txtPPrice_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPPrice.KeyPress
+        num_only(e)
+    End Sub
+
+    Private Sub txtPAmount_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPAmount.KeyPress
+        num_only(e)
     End Sub
 End Class

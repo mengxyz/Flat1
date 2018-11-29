@@ -25,7 +25,27 @@ Public Class MemberSelect
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Me.Close()
+        Module1.Connect()
+        Dim s As String = txtSearch.Text
+        Dim sql As String = "  select C_ID,Fname,Lname,Tel,[Add] from Customer where Fname like '%" + s + "%' or Lname like '%" + s + "%'"
+        Dim ds As New DataSet
+        Dim da As New SqlDataAdapter(sql, Conn)
+        da.Fill(ds, "Cus")
+        dgvCustomer.ReadOnly = True
+        dgvCustomer.DataSource = ds.Tables("Cus")
+        With dgvCustomer
+            .Columns(0).HeaderText = "รหัสลูกค้า"
+            .Columns(0).Width = 100
+            .Columns(1).HeaderText = "ชื่อ"
+            .Columns(1).Width = 150
+            .Columns(2).HeaderText = "นามสกุล"
+            .Columns(2).Width = 150
+            .Columns(3).HeaderText = "เบอร็โทร"
+            .Columns(3).Width = 100
+            .Columns(4).HeaderText = "ที่อยู่"
+            .Columns(4).Width = 100
+        End With
+        Conn.Close()
     End Sub
 
     Private Sub MemberSelect_Load(sender As Object, e As EventArgs) Handles MyBase.Load

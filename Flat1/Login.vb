@@ -53,7 +53,7 @@ Public Class Login
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Module1.Connect()
-        Dim sql As String = "select E_User,E_Status from Employee where E_User = '" & txtUser.Text & "' and E_Pass = '" & txtPass.Text & "'"
+        Dim sql As String = "select Username,Status from [User] where Username = '" & txtUser.Text & "' and Pass = '" & txtPass.Text & "'"
         Dim sqlCmd As New SqlCommand(sql, Conn)
         Dim dr As SqlDataReader = sqlCmd.ExecuteReader
         If dr.Read Then
