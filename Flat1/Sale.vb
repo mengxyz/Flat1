@@ -7,7 +7,9 @@ Public Class Sale
     Dim row, am As Integer
     Dim sum As Double
     Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
-        Me.Close()
+        If MetroFramework.MetroMessageBox.Show(Me, "ต้องการออกจากโปรแกรมใช่หรือไม่", "ยืนยัน", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) = DialogResult.OK Then
+            Me.Close()
+        End If
     End Sub
 
     Private Sub Panel1_MouseDown(sender As Object, e As MouseEventArgs) Handles Panel1.MouseDown
@@ -64,14 +66,20 @@ Public Class Sale
     End Sub
 
     Sub UserLoad()
+        Dim a
         Module1.Connect()
-        Dim sql As String = "select E_User,(E_Fname +' '+ E_Lname) as name from Employee"
+        If last <> User_Na And last <> Nothing Then
+            a = last
+        Else
+            a = User_Na
+        End If
+        Dim sql As String = "select Username,(Fname +' '+ Lname) as name from [User] where Username = '" & a & "'"
         Dim da As New SqlDataAdapter(sql, Conn)
         Dim ds As New DataSet
         da.Fill(ds, "User")
         If ds.Tables("User").Rows.Count <> 0 Then
             cmbUser.DataSource = ds.Tables("User")
-            cmbUser.ValueMember = "E_User"
+            cmbUser.ValueMember = "Username"
             cmbUser.DisplayMember = "name"
         End If
         Conn.Close()
@@ -94,11 +102,11 @@ Public Class Sale
         dgvProduct.DataSource = ds.Tables("Pro")
         With dgvProduct
             .Columns(0).HeaderText = "รหัสสินค้า"
-            .Columns(0).Width = 100
+            .Columns(0).Width = 80
             .Columns(1).HeaderText = "ชื่อสินค้า"
             .Columns(1).Width = 210
             .Columns(2).HeaderText = "จำนวนคงเหลือ"
-            .Columns(2).Width = 100
+            .Columns(2).Width = 120
         End With
         Conn.Close()
     End Sub
@@ -260,5 +268,9 @@ Public Class Sale
         lblSum.Text = "0.00"
         txtID.Text = Nothing
         showdata()
+    End Sub
+
+    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
+        Me.WindowState = FormWindowState.Minimized
     End Sub
 End Class

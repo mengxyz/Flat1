@@ -128,7 +128,7 @@ Partial Class Login
         'PictureBox1
         '
         Me.PictureBox1.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.PictureBox1.Image = Global.Flat1.My.Resources.Resources.icons8_shutdown_40
+        Me.PictureBox1.Image = Global.Flat1.My.Resources.Resources.icons8_close_window_48
         Me.PictureBox1.Location = New System.Drawing.Point(319, 9)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(25, 25)

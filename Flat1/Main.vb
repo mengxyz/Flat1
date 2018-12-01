@@ -75,11 +75,18 @@ Public Class frmMain
         paCate.Visible = False
         paProduct.Visible = False
         paProductView.Visible = False
+        paReport.Visible = False
     End Sub
     Private Sub Main_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If User_Status = "0" Then
             paAdmin.Visible = True
             paUser.Visible = False
+            btnCategory.Visible = False
+            btnItem.Visible = False
+            btnSale.Visible = False
+            btnCustomer.Visible = False
+            btnUser.Text = "ข้อมูลผู้ใช้ระบบ"
+            btnReport.Location = New Point(0, 182)
         Else
             paUser.Visible = True
             paAdmin.Visible = False
@@ -104,6 +111,9 @@ Public Class frmMain
     End Sub
 
     Sub UserPic(ByVal a As String)
+        If last <> Nothing Then
+            User_Na = last
+        End If
         Dim sql As String
         Dim da As SqlDataAdapter
         If a = "1" Then
@@ -120,6 +130,10 @@ Public Class frmMain
             PicEmp.Image = Nothing
             Exit Sub
         End If
+        If tb.Rows(0)(0) Is DBNull.Value And a = "2" Then
+            PicEmp.Image = Nothing
+            Exit Sub
+        End If
         img = tb.Rows(0)(0)
         picdata = img
         Dim ms As New MemoryStream(img)
@@ -131,6 +145,9 @@ Public Class frmMain
         ms.Close()
     End Sub
     Sub Usershodata()
+        If last <> Nothing Then
+            User_Na = last
+        End If
         Module1.Connect()
         Dim sql As String
         If User_Status = 0 Then
@@ -227,9 +244,9 @@ Public Class frmMain
         sqlcmd = New SqlCommand(sql, Conn)
         sqlcmd.ExecuteNonQuery()
         If x = 0 Then
-            MetroFramework.MetroMessageBox.Show(Me, "", "Save Complete", MessageBoxButtons.OK, MessageBoxIcon.Question)
+            MetroFramework.MetroMessageBox.Show(Me, "", "บันทึกเสร็จเรียบร้อย", MessageBoxButtons.OK, MessageBoxIcon.Question)
         ElseIf x = 2 Then
-            MetroFramework.MetroMessageBox.Show(Me, "", "Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Question)
+            MetroFramework.MetroMessageBox.Show(Me, "", "แก้ไขเสร็จเรียบร้อย", MessageBoxButtons.OK, MessageBoxIcon.Question)
         End If
         Conn.Close()
     End Sub
@@ -416,7 +433,7 @@ Public Class frmMain
 
 
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnUser.Click
         If User_Status = "0" Then
             hide()
             paUserAdmin.Visible = True
@@ -427,13 +444,14 @@ Public Class frmMain
             btnUserAdelete.Enabled = False
             btnUserAedit.BackColor = Color.FromArgb(170, 166, 157)
             btnUserAdelete.BackColor = Color.FromArgb(170, 166, 157)
-        Else
+        ElseIf User_Status = "1" Then
             hide()
             PaEmployee.Visible = True
             Usershodata()
+            save_sta = 2
         End If
-        txtEmpUser.Text = "Username"
-        PicEmp.Image = Nothing
+        ' txtEmpUser.Text = "Username"
+        ' PicEmp.Image = Nothing
     End Sub
 
     Private Sub PictureBox8_Click(sender As Object, e As EventArgs) Handles PictureBox8.Click
@@ -456,7 +474,11 @@ Public Class frmMain
             MetroFramework.MetroMessageBox.Show(Me, "", "กรุณาใส่ข้อมูลให้ครบ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
         End If
-        User(save_sta)
+        If User_Status = "0" Then
+            User(save_sta)
+        Else
+            User(2)
+        End If
         clear(1)
     End Sub
 
@@ -547,7 +569,6 @@ Public Class frmMain
         Else
             sex = 1
         End If
-        MessageBox.Show(x)
         If x <> 2 Then
             If patchpic = Nothing Then
                 sql = "insert into [User] (Username,Pass,Fname,Lname,[Add],Tel,Sex,Status) values ('" & txtUser.Text & "','" & txtPass.Text & "','" & txtNa.Text & "','" & txtLname.Text & "','" & txtAddress.Text & "','" & txtPhone.Text & "','" & sex & "','" & status & "')"
@@ -556,14 +577,21 @@ Public Class frmMain
             End If
         ElseIf x = 2 Then
             If patchpic = Nothing Then
+                If User_Status = "1" Then
+                    pk = User_Na
+                    If pk <> txtUser.Text Then
+                        last = txtUser.Text
+                    End If
+                End If
                 sql = "update [User] set Username = '" & txtUser.Text & "',Pass = '" & txtPass.Text & "',Fname = '" & txtNa.Text & "',Lname = '" & txtLname.Text & "',[Add] = '" & txtAddress.Text & "',Tel = '" & txtPhone.Text & "',Sex = '" & sex & "',Status = '" & status & "' where Username = '" & pk & "'"
                 sqlCmd = New SqlCommand(sql, Conn)
                 sqlCmd.ExecuteNonQuery()
-                MessageBox.Show("Save Complete")
+                MetroFramework.MetroMessageBox.Show(Me, "", "แก้ไขเสร็จเรียบร้อย", MessageBoxButtons.OK, MessageBoxIcon.Question)
                 Conn.Close()
                 Exit Sub
             Else
-                sql = "update [User] set Username = '" & txtUser.Text & "',Pass = '" & txtPass.Text & "',Fname = '" & txtNa.Text & "',Lname = '" & txtLname.Text & "',[Add] = '" & txtAddress.Text & "',Tel = '" & txtPhone.Text & "',Sex = '" & sex & "',Status = '" & status & "' ,Pic = @picwhere Username = '" & pk & "'"
+                pk = User_Na
+                sql = "update [User] set Username = '" & txtUser.Text & "',Pass = '" & txtPass.Text & "',Fname = '" & txtNa.Text & "',Lname = '" & txtLname.Text & "',[Add] = '" & txtAddress.Text & "',Tel = '" & txtPhone.Text & "',Sex = '" & sex & "',Status = '" & status & "' ,Pic = @pic where Username = '" & pk & "'"
             End If
         End If
         sqlCmd = New SqlCommand(sql, Conn)
@@ -572,9 +600,9 @@ Public Class frmMain
         End If
         sqlCmd.ExecuteNonQuery()
         If x = 1 Then
-            MetroFramework.MetroMessageBox.Show(Me, "", "Save Complete", MessageBoxButtons.OK, MessageBoxIcon.Question)
+            MetroFramework.MetroMessageBox.Show(Me, "", "บันทึกเสร็จเรียบร้อย", MessageBoxButtons.OK, MessageBoxIcon.Question)
         ElseIf x = 2 Then
-            MetroFramework.MetroMessageBox.Show(Me, "", "Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Question)
+            MetroFramework.MetroMessageBox.Show(Me, "", "แก้ไขเสร็จเรียบร้อย", MessageBoxButtons.OK, MessageBoxIcon.Question)
         End If
         Conn.Close()
     End Sub
@@ -597,11 +625,11 @@ Public Class frmMain
         txtCateNa.Text = ""
         txtCateNa.Enabled = False
         If x = 1 Then
-            MetroFramework.MetroMessageBox.Show(Me, "", "Save Complete", MessageBoxButtons.OK, MessageBoxIcon.Question)
+            MetroFramework.MetroMessageBox.Show(Me, "", "บันทึกเสร็จเรียบร้อย", MessageBoxButtons.OK, MessageBoxIcon.Question)
         ElseIf x = 2 Then
-            MetroFramework.MetroMessageBox.Show(Me, "", "Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Question)
+            MetroFramework.MetroMessageBox.Show(Me, "", "แก้ไขเสร็จเรียบร้อย", MessageBoxButtons.OK, MessageBoxIcon.Question)
         ElseIf x = 3 Then
-            MetroFramework.MetroMessageBox.Show(Me, "", "Delete Complete", MessageBoxButtons.OK, MessageBoxIcon.Question)
+            MetroFramework.MetroMessageBox.Show(Me, "", "ลบเสร็จเรียบร้อย", MessageBoxButtons.OK, MessageBoxIcon.Question)
         End If
         Cateshodata()
     End Sub
@@ -689,7 +717,7 @@ Public Class frmMain
         Dim sqlCmd As New SqlCommand(Sql, Conn)
         sqlCmd.ExecuteNonQuery()
         Conn.Close()
-        MetroFramework.MetroMessageBox.Show(Me, "", "Delete Complete", MessageBoxButtons.OK, MessageBoxIcon.Question)
+        MetroFramework.MetroMessageBox.Show(Me, "", "ลบเสร็จเรียบร้อย", MessageBoxButtons.OK, MessageBoxIcon.Question)
         Usershodata()
         PicEmp.Image = Nothing
         txtEmpUser.Text = "Username"
@@ -772,7 +800,7 @@ Public Class frmMain
 
     End Sub
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles btnCustomer.Click
         hide()
         Customershowdata()
         paCustomerberview.Visible = True
@@ -782,7 +810,7 @@ Public Class frmMain
         btnMDelete.BackColor = Color.FromArgb(170, 166, 157)
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles btnCategory.Click
         hide()
         btnCateAdd.Enabled = True
         btnCateAdd.BackColor = Color.FromArgb(52, 172, 224)
@@ -962,7 +990,7 @@ Public Class frmMain
         save_sta = 2
     End Sub
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles btnSale.Click
         Sale.Show()
     End Sub
 
@@ -1041,7 +1069,7 @@ Public Class frmMain
         Dim sql As String = "delete Product where P_ID = '" & dgvProduct.Rows(a).Cells(0).Value & "'"
         Dim sqlcmd As New SqlCommand(sql, Conn)
         sqlcmd.ExecuteNonQuery()
-        MetroFramework.MetroMessageBox.Show(Me, "", "Delete Complete", MessageBoxButtons.OK, MessageBoxIcon.Question)
+        MetroFramework.MetroMessageBox.Show(Me, "", "ลบเสร็จเรียบร้อย", MessageBoxButtons.OK, MessageBoxIcon.Question)
         Conn.Close()
         productshowdata()
         btnPAdd.Enabled = True
@@ -1051,5 +1079,50 @@ Public Class frmMain
         btnPDelete.Enabled = False
         btnPEdit.BackColor = Color.FromArgb(170, 166, 157)
         btnPDelete.BackColor = Color.FromArgb(170, 166, 157)
+    End Sub
+
+    Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
+        Me.WindowState = FormWindowState.Minimized
+    End Sub
+
+    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
+        Me.WindowState = FormWindowState.Minimized
+    End Sub
+
+    Private Sub Button24_Click(sender As Object, e As EventArgs) Handles Button24.Click
+        paProduct.Visible = False
+    End Sub
+
+    Private Sub Button7_Click_1(sender As Object, e As EventArgs) Handles Button7.Click
+        paProductView.Visible = False
+    End Sub
+
+    Private Sub Button9_Click_1(sender As Object, e As EventArgs) Handles Button9.Click
+        paCustomerberview.Visible = False
+    End Sub
+
+    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
+        paCate.Visible = False
+    End Sub
+
+    Private Sub Button6_Click_1(sender As Object, e As EventArgs)
+        Button11.Visible = True
+    End Sub
+
+    Private Sub Button6_Click_2(sender As Object, e As EventArgs) Handles btnReport.Click
+        hide()
+        If User_Status = "0" Then
+            paAReport.Visible = True
+        Else
+            paReport.Visible = True
+        End If
+    End Sub
+
+    Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
+        paReport.Visible = False
+    End Sub
+
+    Private Sub Button22_Click(sender As Object, e As EventArgs) Handles Button22.Click
+        paAReport.Visible = False
     End Sub
 End Class
