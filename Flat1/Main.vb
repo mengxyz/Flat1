@@ -198,15 +198,19 @@ Public Class frmMain
         Dim sqlcmd As SqlCommand
         If x = 0 Then
             sql = "insert into Customer (C_ID,Fname,Lname,Tel,[Add]) values ('" & txtMID.Text & "','" & txtMfNa.Text & "','" & txtMlNa.Text & "','" & txtMTel.Text & "','" & txtMAdd.Text & "') "
-        Else
+        ElseIf x = 1 Then
             sql = "Update Customer set Fname = '" & txtMfNa.Text & "',Lname = '" & txtMlNa.Text & "',Tel = '" & txtMTel.Text & "',[Add] = '" & txtMAdd.Text & "' where C_ID = '" & txtMID.Text & "'"
+        ElseIf x = 2 Then
+            sql = "delete from Customer where C_ID = '" & CStr(dgvMember.Rows(a).Cells(0).Value) & "'"
         End If
         sqlcmd = New SqlCommand(sql, Conn)
         sqlcmd.ExecuteNonQuery()
         If x = 0 Then
             MetroFramework.MetroMessageBox.Show(Me, "บันทึกเสร็จเรียบร้อย", "", MessageBoxButtons.OK, MessageBoxIcon.Question)
-        Else
+        ElseIf x = 1 Then
             MetroFramework.MetroMessageBox.Show(Me, "แก้ไขเสร็จเรียบร้อย", "", MessageBoxButtons.OK, MessageBoxIcon.Question)
+        ElseIf x = 2 Then
+            MetroFramework.MetroMessageBox.Show(Me, "`ลบเสร็จเรียบร้อย", "", MessageBoxButtons.OK, MessageBoxIcon.Question)
         End If
         Conn.Close()
     End Sub
@@ -540,7 +544,6 @@ Public Class frmMain
             If patchpic = Nothing Then
                 sql = "update [User] set Username = '" & txtUser.Text & "',Pass = '" & txtPass.Text & "',Fname = '" & txtNa.Text & "',Lname = '" & txtLname.Text & "',[Add] = '" & txtAddress.Text & "',Tel = '" & txtPhone.Text & "',Sex = '" & sex & "',Status = '" & status & "' where Username = '" & pk & "'"
                 sqlCmd = New SqlCommand(sql, Conn)
-                sqlCmd.Parameters.Add(New SqlParameter("@pic", picdata))
                 sqlCmd.ExecuteNonQuery()
                 MessageBox.Show("Save Complete")
                 Conn.Close()
@@ -831,8 +834,8 @@ Public Class frmMain
             btnMDelete.Enabled = True
             btnMadd.Enabled = False
             btnMadd.BackColor = Color.FromArgb(170, 166, 157)
-            btnMEdit.BackColor = Color.FromArgb(170, 166, 157)
-            btnMDelete.BackColor = Color.FromArgb(170, 166, 157)
+            btnMEdit.BackColor = Color.FromArgb(52, 172, 224)
+            btnMDelete.BackColor = Color.FromArgb(52, 172, 224)
         End If
     End Sub
 
@@ -877,7 +880,7 @@ Public Class frmMain
         btnMadd.Enabled = True
         btnMEdit.Enabled = False
         btnMDelete.Enabled = False
-        btnMadd.BackColor = Color.FromArgb(52, 172, 2243)
+        btnMadd.BackColor = Color.FromArgb(52, 172, 243)
     End Sub
 
     Private Sub btnPCancle_Click(sender As Object, e As EventArgs) Handles btnPCancle.Click
@@ -984,5 +987,16 @@ Public Class frmMain
 
     Private Sub txtPAmount_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPAmount.KeyPress
         num_only(e)
+    End Sub
+
+    Private Sub btnMDelete_Click(sender As Object, e As EventArgs) Handles btnMDelete.Click
+        Customer(2)
+        Customershowdata()
+        btnMEdit.BackColor = Color.FromArgb(170, 166, 157)
+        btnMDelete.BackColor = Color.FromArgb(170, 166, 157)
+        btnMadd.Enabled = True
+        btnMEdit.Enabled = False
+        btnMDelete.Enabled = False
+        btnMadd.BackColor = Color.FromArgb(52, 172, 243)
     End Sub
 End Class

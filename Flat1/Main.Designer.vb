@@ -1953,13 +1953,13 @@ Partial Class frmMain
         Me.Controls.Add(Me.paMenuTap)
         Me.Controls.Add(Me.paUser)
         Me.Controls.Add(Me.paAdmin)
-        Me.Controls.Add(Me.PaEmployee)
-        Me.Controls.Add(Me.paProduct)
-        Me.Controls.Add(Me.paProductView)
         Me.Controls.Add(Me.paCustomerberview)
         Me.Controls.Add(Me.paCate)
         Me.Controls.Add(Me.paUserAdmin)
         Me.Controls.Add(Me.paCustomer)
+        Me.Controls.Add(Me.PaEmployee)
+        Me.Controls.Add(Me.paProduct)
+        Me.Controls.Add(Me.paProductView)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmMain"
         Me.Text = "Form2"

@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Data
 Public Class Sale
     Dim drag As Boolean
     Dim mousex As Integer
@@ -28,6 +29,38 @@ Public Class Sale
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         MemberSelect.Show()
+    End Sub
+
+    Sub Save()
+        Module1.Connect()
+        Dim sql As String
+        Dim sqlCmd As SqlCommand
+        Dim Orderdate As String = Today.ToString("s")
+        sql = "insert into [Order] (Date,Net,C_ID,Username) values ('" & CDate(Orderdate) & "','" & CDbl(lblSum.Text) & "','" & txtC_ID.Text & "','" & cmbUser.SelectedValue & "')"
+        sqlCmd = New SqlCommand(sql, Conn)
+        sqlCmd.ExecuteNonQuery()
+        sql = "select max(OR_ID) from [Order]"
+        sqlCmd = New SqlCommand(sql, Conn)
+        Dim dr As SqlDataReader = sqlCmd.ExecuteReader
+        dr.Read()
+        Dim OR_ID As String = CStr(dr.Item(0))
+        dr.Close()
+        For i As Integer = 0 To dgvOrder.RowCount - 1
+            Dim P_ID As String = dgvOrder.Rows(i).Cells(0).Value
+            Dim Num As Integer = CInt(dgvOrder.Rows(i).Cells(3).Value)
+            Dim Price As Double = CDbl(dgvOrder.Rows(i).Cells(2).Value)
+            Dim Total_Price As Double = CDbl(dgvOrder.Rows(i).Cells(4).Value)
+            sql = "Insert into Order_Detail (OR_ID,P_ID,Num,Price,Total_Price) values ('" & OR_ID & "','" & P_ID & "','" & Num & "','" & Price & "','" & Total_Price & "')"
+            sqlCmd = New SqlCommand(sql, Conn)
+            sqlCmd.ExecuteNonQuery()
+        Next
+        For i As Integer = 0 To dgvProduct.RowCount - 2
+            sql = "update Product set Amount = '" & CInt(dgvProduct.Rows(i).Cells(2).Value) & "' where P_ID = '" & dgvProduct.Rows(i).Cells(0).Value & "'"
+            sqlCmd = New SqlCommand(sql, Conn)
+            sqlCmd.ExecuteNonQuery()
+        Next
+        txtID.Text = OR_ID
+        MetroFramework.MetroMessageBox.Show(Me, "", "บันทึกข้อมูลเรียบร้อย", MessageBoxButtons.OK, MessageBoxIcon.Question)
     End Sub
 
     Sub UserLoad()
@@ -71,8 +104,8 @@ Public Class Sale
     End Sub
     Sub clear()
         txtAmount.Text = Nothing
-        txtC_ID.Text = Nothing
-        txtCNa.Text = Nothing
+        'txtC_ID.Text = Nothing
+        'txtCNa.Text = Nothing
         txtNum.Text = Nothing
         txtNum.Enabled = False
         txtP_ID.Text = Nothing
@@ -108,6 +141,16 @@ Public Class Sale
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles btAdd.Click
+        If txtC_ID.Text = Nothing Then
+            MetroFramework.MetroMessageBox.Show(Me, "", "กรุณาเลือกลูกค้า", MessageBoxButtons.OK, MessageBoxIcon.Question)
+            Exit Sub
+        ElseIf txtNum.Text = Nothing Then
+            MetroFramework.MetroMessageBox.Show(Me, "", "กรุณาใส่จำนวนที่ขาย", MessageBoxButtons.OK, MessageBoxIcon.Question)
+            Exit Sub
+        ElseIf CInt(txtNum.Text) > CInt(dgvProduct.Rows(row).Cells(2).Value) Then
+            MetroFramework.MetroMessageBox.Show(Me, "", "จำนวนคงเหลือไม่พอ", MessageBoxButtons.OK, MessageBoxIcon.Question)
+            Exit Sub
+        End If
         Dim Gname, GID As String
         Dim Gnum, GAmount As Integer
         Dim Gsum, Gprice As Double
@@ -191,6 +234,7 @@ Public Class Sale
 
     Private Sub btnCancle_Click(sender As Object, e As EventArgs) Handles btnCancle.Click
         clear()
+        dgvOrder.Rows.Clear()
         btnAdd.Enabled = True
         btnAdd.BackColor = Color.FromArgb(52, 172, 224)
         sum = 0
@@ -200,6 +244,7 @@ Public Class Sale
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Save()
         clear()
         btnPrint.Enabled = True
         btnPrint.BackColor = Color.FromArgb(52, 172, 224)
@@ -213,6 +258,7 @@ Public Class Sale
         dgvProduct.Enabled = False
         sum = 0
         lblSum.Text = "0.00"
+        txtID.Text = Nothing
         showdata()
     End Sub
 End Class

@@ -44,7 +44,7 @@ Partial Class Sale
         Me.Button1 = New System.Windows.Forms.Button()
         Me.MetroDateTime1 = New MetroFramework.Controls.MetroDateTime()
         Me.txtC_ID = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.txtID = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -298,14 +298,14 @@ Partial Class Sale
         Me.txtC_ID.Size = New System.Drawing.Size(100, 26)
         Me.txtC_ID.TabIndex = 16
         '
-        'TextBox2
+        'txtID
         '
-        Me.TextBox2.Enabled = False
-        Me.TextBox2.Font = New System.Drawing.Font("FC Active", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(395, 59)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(100, 26)
-        Me.TextBox2.TabIndex = 17
+        Me.txtID.Enabled = False
+        Me.txtID.Font = New System.Drawing.Font("FC Active", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtID.Location = New System.Drawing.Point(395, 59)
+        Me.txtID.Name = "txtID"
+        Me.txtID.Size = New System.Drawing.Size(100, 26)
+        Me.txtID.TabIndex = 17
         '
         'Label3
         '
@@ -513,7 +513,7 @@ Partial Class Sale
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.TextBox2)
+        Me.Controls.Add(Me.txtID)
         Me.Controls.Add(Me.txtC_ID)
         Me.Controls.Add(Me.MetroDateTime1)
         Me.Controls.Add(Me.Button1)
@@ -557,7 +557,7 @@ Partial Class Sale
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents MetroDateTime1 As MetroFramework.Controls.MetroDateTime
     Friend WithEvents txtC_ID As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
+    Friend WithEvents txtID As System.Windows.Forms.TextBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
