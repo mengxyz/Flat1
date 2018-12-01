@@ -201,7 +201,7 @@ Public Class frmMain
         ElseIf x = 1 Then
             sql = "Update Customer set Fname = '" & txtMfNa.Text & "',Lname = '" & txtMlNa.Text & "',Tel = '" & txtMTel.Text & "',[Add] = '" & txtMAdd.Text & "' where C_ID = '" & txtMID.Text & "'"
         ElseIf x = 2 Then
-            sql = "delete from Customer where C_ID = '" & CStr(dgvMember.Rows(a).Cells(0).Value) & "'"
+            sql = "delete Customer  where C_ID = '" & CStr(dgvMember.Rows(a).Cells(0).Value) & "'"
         End If
         sqlcmd = New SqlCommand(sql, Conn)
         sqlcmd.ExecuteNonQuery()
@@ -210,7 +210,7 @@ Public Class frmMain
         ElseIf x = 1 Then
             MetroFramework.MetroMessageBox.Show(Me, "แก้ไขเสร็จเรียบร้อย", "", MessageBoxButtons.OK, MessageBoxIcon.Question)
         ElseIf x = 2 Then
-            MetroFramework.MetroMessageBox.Show(Me, "`ลบเสร็จเรียบร้อย", "", MessageBoxButtons.OK, MessageBoxIcon.Question)
+            MetroFramework.MetroMessageBox.Show(Me, "ลบเสร็จเรียบร้อย", "", MessageBoxButtons.OK, MessageBoxIcon.Question)
         End If
         Conn.Close()
     End Sub
@@ -447,7 +447,15 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles btnUserSave.Click
+        If txtNa.Text = Nothing Or txtLname.Text = Nothing Or txtAddress.Text = Nothing Or txtPhone.Text = Nothing Or txtUser.Text = "Username" Or txtUser.Text = Nothing Or txtPass.Text = "Password" Or txtPass.Text = Nothing Then
+            MetroFramework.MetroMessageBox.Show(Me, "", "กรุณาใส่ข้อมูลให้ครบ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+        If rdbAdmin.Checked = False And rdbUser.Checked = False Or rdbMen.Checked = False And rdbWomen.Checked = False Then
+            MetroFramework.MetroMessageBox.Show(Me, "", "กรุณาใส่ข้อมูลให้ครบ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
         User(save_sta)
         clear(1)
     End Sub
@@ -506,8 +514,14 @@ Public Class frmMain
     End Sub
 
     Private Sub btnCateSave_Click(sender As Object, e As EventArgs) Handles btnCateSave.Click
+        If txtCateNa.Text = Nothing Then
+            MetroFramework.MetroMessageBox.Show(Me, "", "กรุณาใส่ข้อมูล", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
         Cate(save_sta)
         txtCateCID.Text = Nothing
+        btnCateAdd.Enabled = True
+        btnCateAdd.BackColor = Color.FromArgb(52, 172, 224)
     End Sub
 
     Sub User(ByVal x As Integer)
@@ -557,7 +571,11 @@ Public Class frmMain
             sqlCmd.Parameters.Add(New SqlParameter("@pic", img))
         End If
         sqlCmd.ExecuteNonQuery()
-        MessageBox.Show("Save Complete")
+        If x = 1 Then
+            MetroFramework.MetroMessageBox.Show(Me, "", "Save Complete", MessageBoxButtons.OK, MessageBoxIcon.Question)
+        ElseIf x = 2 Then
+            MetroFramework.MetroMessageBox.Show(Me, "", "Update Complete", MessageBoxButtons.OK, MessageBoxIcon.Question)
+        End If
         Conn.Close()
     End Sub
 
@@ -646,6 +664,10 @@ Public Class frmMain
         save_sta = 1
         txtCateNa.Text = ""
         txtCateNa.Enabled = True
+        btnCateSave.Enabled = True
+        btnCateSave.BackColor = Color.FromArgb(52, 172, 224)
+        btnCateAdd.Enabled = False
+        btnCateAdd.BackColor = Color.FromArgb(170, 166, 157)
     End Sub
 
     Private Sub btnCateEdit_Click(sender As Object, e As EventArgs) Handles btnCateEdit.Click
@@ -671,6 +693,12 @@ Public Class frmMain
         Usershodata()
         PicEmp.Image = Nothing
         txtEmpUser.Text = "Username"
+        btnUserAadd.Enabled = True
+        btnUserAadd.BackColor = Color.FromArgb(52, 172, 224)
+        btnUserAedit.Enabled = False
+        btnUserAdelete.Enabled = False
+        btnUserAedit.BackColor = Color.FromArgb(170, 166, 157)
+        btnUserAdelete.BackColor = Color.FromArgb(170, 166, 157)
     End Sub
 
     Private Sub Button8_Click_1(sender As Object, e As EventArgs) Handles Button8.Click
@@ -868,6 +896,14 @@ Public Class frmMain
     End Sub
 
     Private Sub btnPSave_Click(sender As Object, e As EventArgs) Handles btnPSave.Click
+        If txtPName.Text = Nothing Or txtPBrand.Text = Nothing Or txtPhone.Text = Nothing And txtPName.Text = Nothing Or txtPPrice.Text = Nothing Or txtPAmount.Text = Nothing Then
+            MetroFramework.MetroMessageBox.Show(Me, "", "กรุณาใส่ข้อมูลให้ครบ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+        If CInt(txtPAmount.Text) = 0 Or CInt(txtPPrice.Text) = 0 Or cmbCate.SelectedIndex = -1 Then
+            MetroFramework.MetroMessageBox.Show(Me, "", "กรุณาใส่ข้อมูลให้ครบ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
         Product(save_sta)
         paProduct.Visible = False
         paProductView.Visible = True
@@ -998,5 +1034,22 @@ Public Class frmMain
         btnMEdit.Enabled = False
         btnMDelete.Enabled = False
         btnMadd.BackColor = Color.FromArgb(52, 172, 243)
+    End Sub
+
+    Private Sub btnPDelete_Click(sender As Object, e As EventArgs) Handles btnPDelete.Click
+        Module1.Connect()
+        Dim sql As String = "delete Product where P_ID = '" & dgvProduct.Rows(a).Cells(0).Value & "'"
+        Dim sqlcmd As New SqlCommand(sql, Conn)
+        sqlcmd.ExecuteNonQuery()
+        MetroFramework.MetroMessageBox.Show(Me, "", "Delete Complete", MessageBoxButtons.OK, MessageBoxIcon.Question)
+        Conn.Close()
+        productshowdata()
+        btnPAdd.Enabled = True
+        btnPAdd.BackColor = Color.FromArgb(52, 172, 224)
+        paProductView.Visible = True
+        btnPEdit.Enabled = False
+        btnPDelete.Enabled = False
+        btnPEdit.BackColor = Color.FromArgb(170, 166, 157)
+        btnPDelete.BackColor = Color.FromArgb(170, 166, 157)
     End Sub
 End Class
