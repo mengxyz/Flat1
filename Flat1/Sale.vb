@@ -259,6 +259,7 @@ Public Class Sale
     End Sub
 
     Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
+        frmPrintSale.Show()
         clear()
         dgvOrder.Rows.Clear()
         btnAdd.Enabled = True

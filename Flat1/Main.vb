@@ -474,6 +474,21 @@ Public Class frmMain
             MetroFramework.MetroMessageBox.Show(Me, "", "กรุณาใส่ข้อมูลให้ครบ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
         End If
+        Module1.Connect()
+        Dim sql As String
+        Dim sqlCmd As SqlCommand
+        Dim sqlDr As SqlDataReader
+        If last <> txtUser.Text Then
+            sql = "SELECT Username from [User] WHERE Username='" & txtUser.Text & "'"
+            sqlCmd = New SqlCommand(sql, Conn)
+            sqlDr = sqlCmd.ExecuteReader
+            If sqlDr.Read() Then
+                MetroFramework.MetroMessageBox.Show(Me, "", "Username ซ้ำ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                sqlDr.Close()
+                Exit Sub
+            End If
+            sqlDr.Close()
+        End If
         If User_Status = "0" Then
             User(save_sta)
         Else
@@ -493,6 +508,7 @@ Public Class frmMain
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles btnUserAedit.Click
         Module1.Connect()
+        last = txtEmpUser.Text
         Dim sql As String = "select Pass,[Add] from [User] where Username = '" & dgvUser.Rows(a).Cells(0).Value & "'"
         Dim sqlDr As SqlDataReader
         Dim sqlcmd As New SqlCommand(sql, Conn)
@@ -542,23 +558,37 @@ Public Class frmMain
         End If
         Cate(save_sta)
         txtCateCID.Text = Nothing
+        txtCateNa.Text = Nothing
+        txtCateNa.Enabled = False
         btnCateAdd.Enabled = True
         btnCateAdd.BackColor = Color.FromArgb(52, 172, 224)
     End Sub
 
     Sub User(ByVal x As Integer)
+        Module1.Connect()
         Dim sql As String
         Dim sex, status As Integer
         Dim sqlCmd As SqlCommand
         Dim img As Byte() = Nothing
         Dim fs As FileStream
         Dim br As BinaryReader
+        Dim sqlDr As SqlDataReader
+        If x = 1 Or x = 2 And User_Na <> txtUser.Text Then
+            sql = "SELECT Username from [User] WHERE Username='" & txtUser.Text & "'"
+            sqlCmd = New SqlCommand(sql, Conn)
+            sqlDr = sqlCmd.ExecuteReader
+            If sqlDr.Read() Then
+                MetroFramework.MetroMessageBox.Show(Me, "", "Username ซ้ำ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                sqlDr.Close()
+                Exit Sub
+            End If
+            sqlDr.Close()
+        End If
         If patchpic <> Nothing Then
             fs = New FileStream(patchpic, FileMode.Open, FileAccess.Read)
             br = New BinaryReader(fs)
             img = br.ReadBytes(CInt(fs.Length))
         End If
-        Module1.Connect()
         If rdbAdmin.Checked = True Then
             status = 0
         Else
@@ -610,6 +640,19 @@ Public Class frmMain
     Sub Cate(ByVal x As Integer)
         Module1.Connect()
         Dim sql As String
+        Dim sqlCmd As SqlCommand
+        Dim sqlDr As SqlDataReader
+        If x = 1 Or x = 2 Then
+            sql = "SELECT Name FROM Category WHERE Name ='" & txtCateNa.Text & "'"
+            sqlCmd = New SqlCommand(sql, Conn)
+            sqlDr = sqlCmd.ExecuteReader
+            If sqlDr.Read() Then
+                MetroFramework.MetroMessageBox.Show(Me, "", "ชื่อหมวดหมู่ซ้ำ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                sqlDr.Close()
+                Exit Sub
+            End If
+            sqlDr.Close()
+        End If
         If x = 1 Then
             sql = "insert into Category (Ca_ID,Name) values ('" & txtCateCID.Text & "','" & txtCateNa.Text & "')"
         ElseIf x = 2 Then
@@ -619,7 +662,7 @@ Public Class frmMain
         Else
             Exit Sub
         End If
-        Dim sqlCmd As New SqlCommand(sql, Conn)
+        sqlcmd = New SqlCommand(sql, Conn)
         sqlCmd.ExecuteNonQuery()
         Conn.Close()
         txtCateNa.Text = ""
@@ -1124,5 +1167,41 @@ Public Class frmMain
 
     Private Sub Button22_Click(sender As Object, e As EventArgs) Handles Button22.Click
         paAReport.Visible = False
+    End Sub
+
+    Private Sub Button23_Click(sender As Object, e As EventArgs) Handles Button23.Click
+        frmReportUser.Show()
+    End Sub
+
+    Private Sub Button20_Click(sender As Object, e As EventArgs) Handles Button20.Click
+        frmReportProduct.Show()
+    End Sub
+
+    Private Sub Button18_Click_1(sender As Object, e As EventArgs) Handles Button18.Click
+        frmReportProductCate.Show()
+    End Sub
+
+    Private Sub Button21_Click(sender As Object, e As EventArgs) Handles Button21.Click
+        frmReportCustomer.Show()
+    End Sub
+
+    Private Sub Button19_Click(sender As Object, e As EventArgs) Handles Button19.Click
+        frmReportSale.Show()
+    End Sub
+
+    Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
+        frmReportSale.Show()
+    End Sub
+
+    Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
+        frmReportProduct.Show()
+    End Sub
+
+    Private Sub Button14_Click_1(sender As Object, e As EventArgs) Handles Button14.Click
+        frmReportCustomer.Show()
+    End Sub
+
+    Private Sub Button17_Click(sender As Object, e As EventArgs) Handles Button17.Click
+        frmReportProductCate.Show()
     End Sub
 End Class
