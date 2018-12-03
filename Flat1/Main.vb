@@ -4,7 +4,7 @@ Public Class frmMain
     Dim drag As Boolean
     Dim mousex As Integer
     Dim mousey As Integer
-    Dim pk, patchpic As String
+    Dim pk, patchpic, name As String
     Dim a As Integer
     Dim save_sta As Integer
     Dim pscha As Integer
@@ -161,6 +161,7 @@ Public Class frmMain
             txtUser.Text = dr.Item(0).ToString
             txtPass.Text = dr.Item(1).ToString
             txtNa.Text = dr.Item(2).ToString
+            name = dr.Item(2).ToString + dr.Item(3).ToString
             txtLname.Text = dr.Item(3).ToString
             txtPhone.Text = dr.Item(4).ToString
             txtAddress.Text = dr.Item(7).ToString
@@ -445,6 +446,7 @@ Public Class frmMain
             btnUserAedit.BackColor = Color.FromArgb(170, 166, 157)
             btnUserAdelete.BackColor = Color.FromArgb(170, 166, 157)
         ElseIf User_Status = "1" Then
+            'pk = User_Na
             hide()
             PaEmployee.Visible = True
             Usershodata()
@@ -478,12 +480,12 @@ Public Class frmMain
         Dim sql As String
         Dim sqlCmd As SqlCommand
         Dim sqlDr As SqlDataReader
-        If last <> txtUser.Text Then
-            sql = "SELECT Username from [User] WHERE Username='" & txtUser.Text & "'"
+        If last <> txtUser.Text And User_Na <> txtUser.Text Or name <> txtNa.Text + txtLname.Text Then
+            sql = "SELECT Username from [User] WHERE Username='" & txtUser.Text & "' or Fname + Lname like '" & txtNa.Text + txtLname.Text & "'"
             sqlCmd = New SqlCommand(sql, Conn)
             sqlDr = sqlCmd.ExecuteReader
             If sqlDr.Read() Then
-                MetroFramework.MetroMessageBox.Show(Me, "", "Username ซ้ำ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MetroFramework.MetroMessageBox.Show(Me, "", "Usernameหรือ ชื่อ ซ้ำ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 sqlDr.Close()
                 Exit Sub
             End If
@@ -874,6 +876,19 @@ Public Class frmMain
     End Sub
 
     Private Sub Button18_Click(sender As Object, e As EventArgs) Handles btnCuSave.Click
+        If pk = txtMfNa.Text + txtMlNa.Text Then
+        Else
+            Module1.Connect()
+            Dim sql As String = "select C_ID from Customer where Fname+Lname like '" & txtMfNa.Text + txtMlNa.Text & "'"
+            Dim sqlcmd As New SqlCommand(sql, Conn)
+            Dim dr As SqlDataReader = sqlcmd.ExecuteReader
+            If dr.Read Then
+                MetroFramework.MetroMessageBox.Show(Me, "", "ชื่อลูกค้าซ้ำ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                dr.Close()
+                Exit Sub
+            End If
+        End If
+
         Customer(save_sta)
         paCustomer.Visible = False
         paCustomerberview.Visible = True
@@ -885,6 +900,10 @@ Public Class frmMain
         keygen(1)
         cateCmbLoad()
         cmbCate.SelectedIndex = -1
+        txtPName.Text = Nothing
+        txtPBrand.Text = Nothing
+        txtPPrice.Text = Nothing
+        txtPAmount.Text = Nothing
         paProduct.Visible = True
     End Sub
 
@@ -913,6 +932,7 @@ Public Class frmMain
         sqlDr = sqlcmd.ExecuteReader
         If sqlDr.Read Then
             txtMID.Text = sqlDr.Item(0).ToString
+            pk = sqlDr.Item(1).ToString + sqlDr.Item(2).ToString
             txtMfNa.Text = sqlDr.Item(1).ToString
             txtMlNa.Text = sqlDr.Item(2).ToString
             txtMTel.Text = sqlDr.Item(3).ToString
@@ -975,9 +995,27 @@ Public Class frmMain
             MetroFramework.MetroMessageBox.Show(Me, "", "กรุณาใส่ข้อมูลให้ครบ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
         End If
+        If pk = txtPName.Text Then
+        Else
+            Module1.Connect()
+            Dim sql As String = "select P_ID from Product where Name like '" & txtPName.Text & "'"
+            Dim sqlcmd As New SqlCommand(sql, Conn)
+            Dim dr As SqlDataReader = sqlcmd.ExecuteReader
+            If dr.Read Then
+                MetroFramework.MetroMessageBox.Show(Me, "", "ชื่อสินค้าซ้ำ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                dr.Close()
+                Exit Sub
+            End If
+        End If
         Product(save_sta)
-        paProduct.Visible = False
+        hide()
+        btnPAdd.Enabled = True
+        btnPAdd.BackColor = Color.FromArgb(52, 172, 224)
         paProductView.Visible = True
+        btnPEdit.Enabled = False
+        btnPDelete.Enabled = False
+        btnPEdit.BackColor = Color.FromArgb(170, 166, 157)
+        btnPDelete.BackColor = Color.FromArgb(170, 166, 157)
         productshowdata()
     End Sub
 
@@ -991,12 +1029,15 @@ Public Class frmMain
     End Sub
 
     Private Sub btnPCancle_Click(sender As Object, e As EventArgs) Handles btnPCancle.Click
-        btnPEdit.BackColor = Color.FromArgb(170, 166, 157)
-        btnPDelete.BackColor = Color.FromArgb(170, 166, 157)
+        hide()
         btnPAdd.Enabled = True
+        btnPAdd.BackColor = Color.FromArgb(52, 172, 224)
+        paProductView.Visible = True
         btnPEdit.Enabled = False
         btnPDelete.Enabled = False
-        btnPAdd.BackColor = Color.FromArgb(52, 172, 224)
+        btnPEdit.BackColor = Color.FromArgb(170, 166, 157)
+        btnPDelete.BackColor = Color.FromArgb(170, 166, 157)
+        productshowdata()
     End Sub
 
     Private Sub dgvProduct_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvProduct.CellContentClick
@@ -1020,6 +1061,7 @@ Public Class frmMain
         Dim sqlcmd As New SqlCommand(sql, Conn)
         sqlDr = sqlcmd.ExecuteReader
         If sqlDr.Read Then
+            pk = sqlDr.Item(1).ToString
             txtPID.Text = sqlDr.Item(0).ToString
             txtPName.Text = sqlDr.Item(1).ToString
             txtPBrand.Text = sqlDr.Item(2).ToString
@@ -1029,6 +1071,7 @@ Public Class frmMain
         End If
         Conn.Close()
         hide()
+
         paProduct.Visible = True
         save_sta = 2
     End Sub
@@ -1203,5 +1246,23 @@ Public Class frmMain
 
     Private Sub Button17_Click(sender As Object, e As EventArgs) Handles Button17.Click
         frmReportProductCate.Show()
+    End Sub
+
+    Private Sub txtPCancle_Click(sender As Object, e As EventArgs) Handles txtPCancle.Click
+        txtPID.Text = Nothing
+        txtPName.Text = Nothing
+        cmbCate.SelectedIndex = -1
+        txtPBrand.Text = Nothing
+        txtPPrice.Text = Nothing
+        txtPAmount.Text = Nothing
+        hide()
+        btnPAdd.Enabled = True
+        btnPAdd.BackColor = Color.FromArgb(52, 172, 224)
+        paProductView.Visible = True
+        btnPEdit.Enabled = False
+        btnPDelete.Enabled = False
+        btnPEdit.BackColor = Color.FromArgb(170, 166, 157)
+        btnPDelete.BackColor = Color.FromArgb(170, 166, 157)
+        productshowdata()
     End Sub
 End Class
