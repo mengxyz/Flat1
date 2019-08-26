@@ -53,7 +53,7 @@ Public Class Login
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Module1.Connect()
-        Dim sql As String = "select E_User,E_Status from Employee where E_User = '" & txtUser.Text & "' and E_Pass = '" & txtPass.Text & "'"
+        Dim sql As String = "select Username,Status from [User] where Username = '" & txtUser.Text & "' and Pass = '" & txtPass.Text & "'"
         Dim sqlCmd As New SqlCommand(sql, Conn)
         Dim dr As SqlDataReader = sqlCmd.ExecuteReader
         If dr.Read Then
@@ -77,6 +77,18 @@ Public Class Login
     Private Sub txtPass_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPass.KeyPress
         If Asc(e.KeyChar) = Keys.Enter Then
             Button1.PerformClick()
+        End If
+    End Sub
+
+    Private Sub txtPass_Click(sender As Object, e As EventArgs) Handles txtPass.Click
+        txtPass.PasswordChar = "*"
+    End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        If txtPass.PasswordChar = "*" Then
+            txtPass.PasswordChar = ""
+        ElseIf txtPass.PasswordChar = ControlChars.NullChar Then
+            txtPass.PasswordChar = "*"
         End If
     End Sub
 End Class

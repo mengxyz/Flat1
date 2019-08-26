@@ -6,6 +6,7 @@ Module Module1
     Public Conn As New SqlConnection
     Public User_Na As String
     Public User_Status As String
+    Public last As String = Nothing
     Public Sub Connect()
         If Conn.State = ConnectionState.Open Then Conn.Close()
         Conn.ConnectionString = strConn
